@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe Gerencial — Confirmación de Citas</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:      #f9f9f7;
+    --surface-1: #fcfcfb;
+    --surface-2: #f2f1ec;
+    --ink:       #0b0b0b;
+    --ink-2:     #52514e;
+    --muted:     #898781;
+    --border:    rgba(11,11,11,0.10);
+    --s1:        #2a78d6;   /* azul — bot / serie principal */
+    --s2:        #1baf7a;   /* aqua — agente / serie secundaria */
+    --s3:        #eda100;   /* amarillo */
+    --s8:        #eb6834;   /* naranja */
+    --good:      #006300;
+    --good-soft: #e6f2e2;
+    --bad:       #b23a3a;
+    --bad-soft:  #fbe9e6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:      #0d0d0d;
+      --surface-1: #1a1a19;
+      --surface-2: #221f1a;
+      --ink:       #ffffff;
+      --ink-2:     #c3c2b7;
+      --muted:     #928f87;
+      --border:    rgba(255,255,255,0.12);
+      --s1:        #4f95ea;
+      --s2:        #2cc48c;
+      --s3:        #d99a1e;
+      --s8:        #ea7c4a;
+      --good:      #4fbf4f;
+      --good-soft: #163019;
+      --bad:       #e5786f;
+      --bad-soft:  #331a17;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page:      #0d0d0d;
+    --surface-1: #1a1a19;
+    --surface-2: #221f1a;
+    --ink:       #ffffff;
+    --ink-2:     #c3c2b7;
+    --muted:     #928f87;
+    --border:    rgba(255,255,255,0.12);
+    --s1:        #4f95ea;
+    --s2:        #2cc48c;
+    --s3:        #d99a1e;
+    --s8:        #ea7c4a;
+    --good:      #4fbf4f;
+    --good-soft: #163019;
+    --bad:       #e5786f;
+    --bad-soft:  #331a17;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.4;
+    padding: 32px 20px 56px;
+    font-variant-numeric: tabular-nums;
+  }
+  .page { max-width: 1120px; margin: 0 auto; }
+
+  .eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--s1); }
+  header h1 { font-size: clamp(22px, 3.2vw, 30px); font-weight: 750; letter-spacing: -0.015em; margin-top: 6px; text-wrap: balance; }
+  header .dek { color: var(--ink-2); font-size: 14px; margin-top: 8px; max-width: 68ch; }
+  header .meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; font-size: 12px; color: var(--muted); }
+  header .meta b { color: var(--ink-2); font-weight: 600; }
+
+  /* ---- tab bars ---- */
+  .tabbar { display: flex; gap: 4px; margin-top: 26px; border-bottom: 1px solid var(--border); }
+  .tabbar.outer { margin-top: 22px; }
+  .tabbar button {
+    appearance: none; border: none; background: transparent; color: var(--ink-2);
+    font: inherit; font-size: 13.5px; font-weight: 650; cursor: pointer;
+    padding: 9px 4px; margin-right: 24px; border-bottom: 2px solid transparent;
+  }
+  .tabbar.outer button { font-size: 14.5px; }
+  .tabbar button.active { color: var(--ink); border-bottom-color: var(--s1); }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ---- section scaffolding ---- */
+  section { margin-top: 30px; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .section-head h2 { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+  .section-head .note { font-size: 12px; color: var(--muted); }
+  .tab-intro { font-size: 13px; color: var(--muted); margin-top: 16px; max-width: 74ch; }
+
+  /* ---- hero KPI grid ---- */
+  .hero-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .hero-card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; container-type: inline-size; }
+  .hero-card .label { font-size: 12px; color: var(--ink-2); font-weight: 600; }
+  .hero-card .value { font-size: clamp(26px, 11cqi, 42px); font-weight: 750; letter-spacing: -0.02em; margin-top: 5px; line-height: 1; }
+  .chip { display: inline-flex; align-items: center; gap: 4px; margin-top: 11px; font-size: 11.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+  .chip.good { background: var(--good-soft); color: var(--good); }
+  .chip.bad  { background: var(--bad-soft);  color: var(--bad); }
+  .chip.flat { background: var(--surface-2); color: var(--muted); }
+  .hero-card .foot { margin-top: 7px; font-size: 11.5px; color: var(--muted); }
+
+  /* ---- two-up split ---- */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .split3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 780px) { .split, .split3 { grid-template-columns: 1fr; } }
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+  .card h3 { font-size: 13.5px; font-weight: 700; margin-bottom: 3px; }
+  .card .sub { font-size: 11.5px; color: var(--muted); margin-bottom: 12px; }
+
+  /* ---- bars ---- */
+  .bar-row { display: grid; grid-template-columns: 128px 1fr 46px; align-items: center; gap: 10px; margin: 8px 0; }
+  .bar-row .lbl { font-size: 12px; color: var(--ink-2); }
+  .bar-track { position: relative; height: 13px; background: var(--surface-2); border-radius: 7px; overflow: hidden; }
+  .bar-fill { position: absolute; inset: 0 auto 0 0; border-radius: 7px; }
+  .bar-row .num { font-size: 12.5px; font-weight: 700; text-align: right; }
+
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .trio-col { text-align: center; }
+  .trio-col .m { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+  .trio-bar-wrap { height: 78px; display: flex; align-items: flex-end; justify-content: center; margin: 7px 0 5px; }
+  .trio-bar { width: 42px; border-radius: 6px 6px 3px 3px; }
+  .trio-col .v { font-size: 14px; font-weight: 750; }
+  .trio-col .na { font-size: 12px; color: var(--muted); align-self: center; }
+
+  /* ---- financials strip ---- */
+  .fin-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+  .fin-card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }
+  .fin-card .label { font-size: 12px; color: var(--ink-2); font-weight: 600; }
+  .fin-card .value { font-size: clamp(18px, 5cqi, 25px); font-weight: 750; margin-top: 5px; }
+  .fin-card .foot { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
+
+  /* ---- attention panel ---- */
+  .attention { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 4px 0; overflow: hidden; }
+  .att-item { display: grid; grid-template-columns: 4px 1fr; gap: 14px; padding: 13px 20px; }
+  .att-item + .att-item { border-top: 1px solid var(--border); }
+  .att-item .stripe { border-radius: 3px; background: var(--bad); }
+  .att-item.amber .stripe { background: var(--s3); }
+  .att-item p { font-size: 13px; color: var(--ink-2); }
+  .att-item p b { color: var(--ink); font-weight: 700; }
+
+  .tab-footer { margin-top: 22px; font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+  footer.page-footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--muted); line-height: 1.6; }
+  footer.page-footer em { font-style: italic; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="eyebrow">Informe gerencial</div>
+    <h1>Confirmación de citas — entrega y armado</h1>
+    <p class="dek">Resumen ejecutivo de las dos gestiones del programa de confirmación (bot + agente). Se reportan por separado — no son comparables entre sí. Para el desglose completo por causal, subcausal y departamento, ver <em>Dashboard Efectividad Gestion Bot.html</em>.</p>
+    <div class="meta">
+      <span><b>Emitido:</b> 19/08/2026</span>
+    </div>
+  </header>
+
+  <div class="tabbar outer" role="tablist">
+    <button type="button" class="active" data-group="outer" data-target="ge-entregas">Entregas</button>
+    <button type="button" data-group="outer" data-target="ge-armado">Armado</button>
+  </div>
+
+  <!-- ======================= ENTREGAS ======================= -->
+  <div id="ge-entregas" class="panel active">
+
+  <div class="tabbar" role="tablist">
+    <button type="button" class="active" data-group="entregas" data-target="ge-ent-julio">Julio</button>
+    <button type="button" data-group="entregas" data-target="ge-ent-agosto">Agosto</button>
+    <button type="button" data-group="entregas" data-target="ge-ent-comparativo">Comparativo</button>
+  </div>
+
+  <!-- ---- Entregas / Julio ---- -->
+  <div id="ge-ent-julio" class="panel active">
+    <p class="tab-intro">Julio 2026 (7–31) · 9.210 operaciones únicas · 3.681 gestionadas por el agente.</p>
+
+    <section>
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="label">Contactabilidad del agente</div>
+          <div class="value">99,3%</div>
+          <span class="chip good">3.654 de 3.681</span>
+        </div>
+        <div class="hero-card">
+          <div class="label">Efectividad general de la gestión</div>
+          <div class="value">93,9%</div>
+          <span class="chip flat">8.651 de 9.210 entregadas</span>
+        </div>
+        <div class="hero-card">
+          <div class="label">Tasa de no efectivas (todos los canales)</div>
+          <div class="value">5,84%</div>
+          <span class="chip flat">873 de 14.961 despachos</span>
+        </div>
+        <div class="hero-card">
+          <div class="label">Ahorro estimado vs. línea base (junio)</div>
+          <div class="value">$13,26M</div>
+          <span class="chip good">≈147 entregas evitadas</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div class="card">
+          <h3>Bot vs. gestión del agente</h3>
+          <div class="sub">Efectividad de la entrega según quién logró la confirmación</div>
+          <div class="bar-row"><span class="lbl">Bot</span><div class="bar-track"><div class="bar-fill" style="width:94.8%; background:var(--s1);"></div></div><span class="num">94,8%</span></div>
+          <div class="bar-row"><span class="lbl">Agente</span><div class="bar-track"><div class="bar-fill" style="width:92.8%; background:var(--s2);"></div></div><span class="num">92,8%</span></div>
+          <div class="sub" style="margin-top:8px; margin-bottom:0;">Brecha de 2,0 pp a favor del bot — se amplió frente al corte anterior (0,8 pp)</div>
+        </div>
+        <div class="card">
+          <h3>Causales principales — no efectivas del agente</h3>
+          <div class="sub">Top 5 de 266 casos (88,0% del total)</div>
+          <div class="bar-row"><span class="lbl">Contacto no efec.</span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--s8);"></div></div><span class="num">68</span></div>
+          <div class="bar-row"><span class="lbl">Desiste compra</span><div class="bar-track"><div class="bar-fill" style="width:88.2%; background:var(--s8);"></div></div><span class="num">60</span></div>
+          <div class="bar-row"><span class="lbl">Cliente no recibe</span><div class="bar-track"><div class="bar-fill" style="width:83.8%; background:var(--s8);"></div></div><span class="num">57</span></div>
+          <div class="bar-row"><span class="lbl">Error asesoría</span><div class="bar-track"><div class="bar-fill" style="width:45.6%; background:var(--s8);"></div></div><span class="num">31</span></div>
+          <div class="bar-row"><span class="lbl">Dirección errada</span><div class="bar-track"><div class="bar-fill" style="width:26.5%; background:var(--s8);"></div></div><span class="num">18</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Impacto económico</h2></div>
+      <div class="fin-strip">
+        <div class="fin-card"><div class="label">Impacto esperado — proyección business case</div><div class="value" style="color:var(--bad);">-$439.059</div><div class="foot">Negativo: el ahorro esperado ($2.685.941) no cubre el arranque del programa</div></div>
+        <div class="fin-card"><div class="label">Costo real de las no efectivas</div><div class="value">$78.570.000</div><div class="foot">873 × $90.000</div></div>
+        <div class="fin-card"><div class="label">Ahorro vs. tasa de referencia (junio, 6,82%)</div><div class="value">$13.260.618</div><div class="foot">≈147 entregas evitadas</div></div>
+        <div class="fin-card"><div class="label">Costo del programa — julio</div><div class="value">$7.625.000</div><div class="foot">Incluye $4,5M de arranque (equipo, único mes)</div></div>
+      </div>
+      <p class="sub" style="margin-top:10px;">El business case valora cada entrega evitada con un modelo de costo de despacho distinto del castigo fijo de $90.000 — las cifras no son sumables entre sí, se muestran una junto a otra solo como referencia.</p>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Puntos de atención</h2></div>
+      <div class="attention">
+        <div class="att-item"><div class="stripe"></div><p><b>Antioquia es el departamento con menor efectividad (88,8%)</b>, junto con Atlántico y Cundinamarca concentra el 71,4% de los fallos gestionados por el agente.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>"Cliente ausente" post-confirmación explica el 27,5%</b> de las 247 entregas que el agente había confirmado y aun así fallaron.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Entregas / Agosto ---- -->
+  <div id="ge-ent-agosto" class="panel">
+    <p class="tab-intro">Agosto 2026 (corte parcial) · gestión bot+agente 1–15 · contexto general de despachos 1–17 · 5.758 operaciones únicas.</p>
+
+    <section>
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="label">Contactabilidad del agente</div>
+          <div class="value">99,7%</div>
+          <span class="chip good">▲ +0,4 pp vs. julio</span>
+          <div class="foot">2.357 de 2.363 · corregido 19/08</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Efectividad general de la gestión</div>
+          <div class="value">95,8%</div>
+          <span class="chip good">▲ +1,9 pp vs. julio</span>
+          <div class="foot">5.514 de 5.758 operaciones</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Tasa de no efectivas (todos los canales)</div>
+          <div class="value">5,58%</div>
+          <span class="chip good">▼ −0,26 pp vs. julio</span>
+          <div class="foot">374 de 6.699 despachos</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Ahorro estimado vs. línea base (junio)</div>
+          <div class="value">$7,47M</div>
+          <span class="chip good">≈83 entregas evitadas</span>
+          <div class="foot">Proyección a cierre de mes: ≈$13,6M</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div class="card">
+          <h3>Bot vs. gestión del agente</h3>
+          <div class="sub">Efectividad de la entrega según quién logró la confirmación</div>
+          <div class="bar-row"><span class="lbl">Bot</span><div class="bar-track"><div class="bar-fill" style="width:95.8%; background:var(--s1);"></div></div><span class="num">95,8%</span></div>
+          <div class="bar-row"><span class="lbl">Agente</span><div class="bar-track"><div class="bar-fill" style="width:95.6%; background:var(--s2);"></div></div><span class="num">95,6%</span></div>
+          <div class="sub" style="margin-top:8px; margin-bottom:0;">Brecha de 0,2 pp — el bot vuelve a superar al agente, que había ganado por primera vez en el corte 1-11</div>
+        </div>
+        <div class="card">
+          <h3>Causales principales — no efectivas del agente</h3>
+          <div class="sub">Top 5 de 103 casos (82,5% del total)</div>
+          <div class="bar-row"><span class="lbl">Contacto no efec.</span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--s8);"></div></div><span class="num">31</span></div>
+          <div class="bar-row"><span class="lbl">Cliente no recibe</span><div class="bar-track"><div class="bar-fill" style="width:64.5%; background:var(--s8);"></div></div><span class="num">20</span></div>
+          <div class="bar-row"><span class="lbl">Desiste compra</span><div class="bar-track"><div class="bar-fill" style="width:45.2%; background:var(--s8);"></div></div><span class="num">14</span></div>
+          <div class="bar-row"><span class="lbl">Error asesoría</span><div class="bar-track"><div class="bar-fill" style="width:35.5%; background:var(--s8);"></div></div><span class="num">11</span></div>
+          <div class="bar-row"><span class="lbl">Producto no apto</span><div class="bar-track"><div class="bar-fill" style="width:29.0%; background:var(--s8);"></div></div><span class="num">9</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Impacto económico</h2></div>
+      <div class="fin-strip">
+        <div class="fin-card"><div class="label">Impacto esperado — proyección business case</div><div class="value">$7.135.104</div><div class="foot">Ya sin el costo único de equipo (solo aplicó en julio)</div></div>
+        <div class="fin-card"><div class="label">Costo real de las no efectivas</div><div class="value">$33.660.000</div><div class="foot">374 × $90.000</div></div>
+        <div class="fin-card"><div class="label">Ahorro vs. tasa de referencia (junio, 6,82%)</div><div class="value">$7.470.000</div><div class="foot">≈83 entregas evitadas</div></div>
+        <div class="fin-card"><div class="label">Proyección de ahorro a cierre de agosto</div><div class="value">≈$13.621.765</div><div class="foot">Lineal sobre 31 días — no es un dato real aún</div></div>
+      </div>
+      <p class="sub" style="margin-top:10px;">El business case valora cada entrega evitada con un modelo de costo de despacho distinto del castigo fijo de $90.000 — las cifras no son sumables entre sí, se muestran una junto a otra solo como referencia.</p>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Puntos de atención</h2></div>
+      <div class="attention">
+        <div class="att-item amber"><div class="stripe"></div><p><b>Cundinamarca es ahora el departamento con menor efectividad (93,5%)</b>, desplazando a Antioquia (94,7%).</p></div>
+        <div class="att-item"><div class="stripe"></div><p><b>Corregido 19/08:</b> el corte anterior mostraba 136 casos "sin gestión" (contactabilidad 94,0%) — eran rezago normal del día más reciente cargado (15/08), ya se gestionaron y la contactabilidad vuelve a 99,7%.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Entregas / Comparativo ---- -->
+  <div id="ge-ent-comparativo" class="panel">
+    <p class="tab-intro">Junio (solo bot, sin programa de agente) → Julio → Agosto (corte parcial).</p>
+
+    <section>
+      <div class="split">
+        <div class="card">
+          <h3>Tasa de no efectivas (todos los canales)</h3>
+          <div class="sub">Mejora sostenida, aunque más lenta que lo que sugería el primer corte de agosto</div>
+          <div class="trio" id="ge-trio-tasa"></div>
+        </div>
+        <div class="card">
+          <h3>Efectividad general de la gestión (bot + agente)</h3>
+          <div class="sub">Junio no tiene cifra: el programa de agente no existía ese mes</div>
+          <div class="trio" id="ge-trio-efec"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Impacto económico mes a mes</h2></div>
+      <div class="fin-strip">
+        <div class="fin-card"><div class="label">Ahorro Junio → Julio</div><div class="value">$13.260.618</div><div class="foot">≈147 entregas evitadas (-0,98 pp)</div></div>
+        <div class="fin-card"><div class="label">Ahorro Julio → Agosto (parcial)</div><div class="value">$1.530.000</div><div class="foot">≈17 entregas evitadas (-0,26 pp) · vs. mes anterior, no vs. referencia fija</div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Puntos de atención</h2></div>
+      <div class="attention">
+        <div class="att-item amber"><div class="stripe"></div><p><b>Los dos cortes de agosto ya no coinciden en fecha:</b> la gestión bot+agente llega al 15, el contexto general de despachos al 17 (16 domingo, 17 festivo — sin actividad de call center esos días).</p></div>
+        <div class="att-item"><div class="stripe"></div><p><b>La confirmación bot+agente sube de 97,2% a 97,5%</b> (+0,3 pp) al ampliar el corte de agosto — el nivel logrado en julio se sostiene.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="tab-footer">Fuente: <em>Gestión confirmacion de citas 2026.xlsx</em>, <em>Entregas no efectivas [mes] 2026.xlsx</em>, <em>Entregas no efectivas junio vs julio 2026.docx</em>. Costo por entrega no efectiva: $90.000. Línea base de referencia: junio (6,82%).</div>
+
+  </div><!-- /ge-entregas -->
+
+  <!-- ======================= ARMADO ======================= -->
+  <div id="ge-armado" class="panel">
+
+  <div class="tabbar" role="tablist">
+    <button type="button" class="active" data-group="armado" data-target="ge-arm-julio">Julio</button>
+    <button type="button" data-group="armado" data-target="ge-arm-agosto">Agosto</button>
+    <button type="button" data-group="armado" data-target="ge-arm-comparativo">Comparativo</button>
+  </div>
+
+  <!-- ---- Armado / Julio ---- -->
+  <div id="ge-arm-julio" class="panel active">
+    <p class="tab-intro">Julio 2026 (24–31, 7 campañas) · 1.040 envíos · sin "antes del bot" que comparar — el bot de armado arrancó el 24/07.</p>
+
+    <section>
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="label">Contactabilidad general (bot + agente)</div>
+          <div class="value">64,3%</div>
+          <span class="chip flat">669 de 1.040</span>
+        </div>
+        <div class="hero-card">
+          <div class="label">Confirmación general ("Sí, confirmo")</div>
+          <div class="value">53,4%</div>
+          <span class="chip flat">555 de 1.040</span>
+        </div>
+        <div class="hero-card">
+          <div class="label">Efectividad neta del armado</div>
+          <div class="value">60,8%</div>
+          <span class="chip flat">467 de 768 resueltos</span>
+        </div>
+        <div class="hero-card">
+          <div class="label">Sin contacto</div>
+          <div class="value">371</div>
+          <span class="chip bad">102 por falla de WhatsApp</span>
+          <div class="foot">Mes de lanzamiento — base de teléfonos sin depurar</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div class="card">
+          <h3>Causales principales — armados no efectivos</h3>
+          <div class="sub">Top 5 de 301 casos (74,8% del total)</div>
+          <div class="bar-row"><span class="lbl">Cliente cancela</span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--s8);"></div></div><span class="num">66</span></div>
+          <div class="bar-row"><span class="lbl">Arma - llamada</span><div class="bar-track"><div class="bar-fill" style="width:93.9%; background:var(--s8);"></div></div><span class="num">62</span></div>
+          <div class="bar-row"><span class="lbl">Armó el producto</span><div class="bar-track"><div class="bar-fill" style="width:83.3%; background:var(--s8);"></div></div><span class="num">55</span></div>
+          <div class="bar-row"><span class="lbl">No quiso armado</span><div class="bar-track"><div class="bar-fill" style="width:34.8%; background:var(--s8);"></div></div><span class="num">23</span></div>
+          <div class="bar-row"><span class="lbl">No armable</span><div class="bar-track"><div class="bar-fill" style="width:28.8%; background:var(--s8);"></div></div><span class="num">19</span></div>
+        </div>
+        <div class="card">
+          <h3>Resolución del armado (768 ya resueltos)</h3>
+          <div class="sub">Excluye 204 citas pendientes (19,6% — todavía no llega la fecha)</div>
+          <div class="bar-row"><span class="lbl">Efectivo</span><div class="bar-track"><div class="bar-fill" style="width:60.8%; background:var(--good);"></div></div><span class="num">467</span></div>
+          <div class="bar-row"><span class="lbl">No efectivo</span><div class="bar-track"><div class="bar-fill" style="width:39.2%; background:var(--bad);"></div></div><span class="num">301</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Puntos de atención</h2></div>
+      <div class="attention">
+        <div class="att-item"><div class="stripe"></div><p><b>24/07 (lanzamiento) fue el peor día:</b> 37% de fallo de entrega de WhatsApp (vs. &lt;7% el resto del mes) — sugiere teléfonos desactualizados en la base inicial.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>Sin archivo de costo todavía</b> para los 301 armados no efectivos de julio (sí disponible para agosto).</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Armado / Agosto ---- -->
+  <div id="ge-arm-agosto" class="panel">
+    <p class="tab-intro">Agosto 2026 (1–14, corte parcial, 10 campañas) · 1.259 envíos.</p>
+
+    <section>
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="label">Contactabilidad general (bot + agente)</div>
+          <div class="value">77,1%</div>
+          <span class="chip good">▲ +12,8 pp vs. julio</span>
+          <div class="foot">971 de 1.259</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Confirmación general ("Sí, confirmo")</div>
+          <div class="value">64,7%</div>
+          <span class="chip good">▲ +11,3 pp vs. julio</span>
+          <div class="foot">815 de 1.259</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Efectividad neta del armado</div>
+          <div class="value">54,8%</div>
+          <span class="chip bad">▼ −6,0 pp vs. julio</span>
+          <div class="foot">302 de 551 resueltos · 51,4% aún pendiente</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Costo de los 249 no efectivos</div>
+          <div class="value">$5,15M</div>
+          <span class="chip bad">$20.687 promedio/caso</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div class="card">
+          <h3>Causales principales — armados no efectivos</h3>
+          <div class="sub">Top 5 de 249 casos (80,3% del total)</div>
+          <div class="bar-row"><span class="lbl">Arma - llamada</span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--s8);"></div></div><span class="num">62</span></div>
+          <div class="bar-row"><span class="lbl">Armó el producto</span><div class="bar-track"><div class="bar-fill" style="width:77.4%; background:var(--s8);"></div></div><span class="num">48</span></div>
+          <div class="bar-row"><span class="lbl">Cliente cancela</span><div class="bar-track"><div class="bar-fill" style="width:74.2%; background:var(--s8);"></div></div><span class="num">46</span></div>
+          <div class="bar-row"><span class="lbl">Novedad</span><div class="bar-track"><div class="bar-fill" style="width:41.9%; background:var(--s8);"></div></div><span class="num">26</span></div>
+          <div class="bar-row"><span class="lbl">Inmueble cerrado</span><div class="bar-track"><div class="bar-fill" style="width:29.0%; background:var(--s8);"></div></div><span class="num">18</span></div>
+        </div>
+        <div class="card">
+          <h3>Resolución del armado (551 ya resueltos)</h3>
+          <div class="sub">Excluye 647 citas pendientes (51,4% — corte inmaduro, no comparar en directo contra julio)</div>
+          <div class="bar-row"><span class="lbl">Efectivo</span><div class="bar-track"><div class="bar-fill" style="width:54.8%; background:var(--good);"></div></div><span class="num">302</span></div>
+          <div class="bar-row"><span class="lbl">No efectivo</span><div class="bar-track"><div class="bar-fill" style="width:45.2%; background:var(--bad);"></div></div><span class="num">249</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Puntos de atención</h2></div>
+      <div class="attention">
+        <div class="att-item amber"><div class="stripe"></div><p><b>05/08 — vacío operativo:</b> el excel de gestión no tiene ninguna fila ese día; 74 clientes sin botón quedaron sin ningún seguimiento registrado.</p></div>
+        <div class="att-item"><div class="stripe"></div><p><b>La caída de efectividad neta (-6,0 pp) es la métrica menos madura:</b> más de la mitad de las citas de agosto todavía no llega a su fecha.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Armado / Comparativo ---- -->
+  <div id="ge-arm-comparativo" class="panel">
+    <p class="tab-intro">Julio (24–31) → Agosto (03–14, corte parcial). Sin "antes del bot" que comparar.</p>
+
+    <section>
+      <div class="split3">
+        <div class="card">
+          <h3>Contactabilidad</h3>
+          <div class="trio" id="ge-arm-trio-contact"></div>
+        </div>
+        <div class="card">
+          <h3>Confirmación</h3>
+          <div class="trio" id="ge-arm-trio-confirm"></div>
+        </div>
+        <div class="card">
+          <h3>Efectividad neta</h3>
+          <div class="trio" id="ge-arm-trio-efec"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Puntos de atención</h2></div>
+      <div class="attention">
+        <div class="att-item"><div class="stripe"></div><p><b>Contactabilidad y confirmación mejoran con fuerza</b> (+12,8 pp y +11,3 pp) — coincide con la depuración de la lista de teléfonos tras el lanzamiento del 24/07.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>Cambia el liderazgo de causal:</b> en julio dominaba "cliente cancela" (21,9%), en agosto pasa a liderar "cliente arma la llamada" (24,9%) — el cliente arma el mueble por su cuenta antes de que llegue el técnico.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>Pendiente para igualar la profundidad de Entregas:</b> costo de julio, proyección de business case propia de armado, y desglose por departamento (25% de la gestión sin dato de ubicación).</p></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="tab-footer">Fuente: <em>AUDITORIA DE LAS CONVERSACIONES - ARMADO 2026.xlsx</em>, <em>Gestion de confirmacion de armado 2026.xlsx</em>, <em>Detalle de armados - causales 2026.csv</em>, <em>MANUAL DE CAUSALES.xlsx</em>.</div>
+
+  </div><!-- /ge-armado -->
+
+  <footer class="page-footer">
+    Las gestiones de <b>entrega</b> y <b>armado</b> son dos flujos de negocio distintos que se reportan cada uno por su cuenta — no se comparan entre sí. Para el desglose completo por causal, subcausal, departamento y las auditorías de llamada al cliente, ver <em>Dashboard Efectividad Gestion Bot.html</em> en la raíz del proyecto.
+  </footer>
+
+</div>
+
+<script>
+function trio(containerId, items, opts) {
+  const el = document.getElementById(containerId);
+  const max = opts.max;
+  items.forEach((it) => {
+    const col = document.createElement("div");
+    col.className = "trio-col";
+    const h = Math.max(6, Math.round((it.v / max) * 72));
+    const color = it.na ? "var(--axis)" : (opts.color || "var(--s1)");
+    col.innerHTML = `
+      <div class="m">${it.m}</div>
+      <div class="trio-bar-wrap">${it.na ? `<div class="na">N/D</div>` : `<div class="trio-bar" style="height:${h}px; background:${color};"></div>`}</div>
+      <div class="v">${it.na ? "—" : it.v.toLocaleString("es-CO", {minimumFractionDigits:1, maximumFractionDigits:2}) + "%"}</div>
+    `;
+    el.appendChild(col);
+  });
+}
+
+trio("ge-trio-tasa", [
+  { m: "Junio",  v: 6.82 },
+  { m: "Julio",  v: 5.84 },
+  { m: "Agosto", v: 5.58 }
+], { max: 6.82, color: "var(--s8)" });
+
+trio("ge-trio-efec", [
+  { m: "Junio",  v: 0, na: true },
+  { m: "Julio",  v: 93.9 },
+  { m: "Agosto", v: 95.8 }
+], { max: 95.8, color: "var(--s1)" });
+
+trio("ge-arm-trio-contact", [
+  { m: "Julio",  v: 64.3 },
+  { m: "Agosto", v: 77.1 }
+], { max: 77.1, color: "var(--s1)" });
+
+trio("ge-arm-trio-confirm", [
+  { m: "Julio",  v: 53.4 },
+  { m: "Agosto", v: 64.7 }
+], { max: 64.7, color: "var(--s2)" });
+
+trio("ge-arm-trio-efec", [
+  { m: "Julio",  v: 60.8 },
+  { m: "Agosto", v: 54.8 }
+], { max: 60.8, color: "var(--s8)" });
+
+/* ---- tab wiring: independent groups (outer, entregas, armado) ---- */
+document.querySelectorAll(".tabbar button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const group = btn.dataset.group;
+    document.querySelectorAll(`.tabbar button[data-group="${group}"]`).forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    const groupButtons = document.querySelectorAll(`.tabbar button[data-group="${group}"]`);
+    groupButtons.forEach((b) => {
+      const panel = document.getElementById(b.dataset.target);
+      if (panel) panel.classList.toggle("active", b === btn);
+    });
+  });
+});
+</script>
+</body>
+</html>
