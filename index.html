@@ -394,9 +394,9 @@
           <span class="chip flat">3.207 de 7.541</span>
         </div>
         <div class="hero-card">
-          <div class="label">Efectividad neta del armado</div>
-          <div class="value">64,0%</div>
-          <span class="chip flat">8.726 de 13.631 servicios</span>
+          <div class="label">Tasa de servicios de armados no efectivos</div>
+          <div class="value">36,0%</div>
+          <span class="chip flat">4.905 de 13.631 servicios</span>
         </div>
         <div class="hero-card">
           <div class="label">Sin contacto</div>
@@ -432,7 +432,7 @@
       <div class="attention">
         <div class="att-item"><div class="stripe"></div><p><b>Junio tiene la menor recuperación del agente (9,0%)</b> de los tres meses — el archivo de Gestión solo tenía registro del 25% de los fallidos de WhatsApp de junio, contra 70-75% en julio/agosto.</p></div>
         <div class="att-item amber"><div class="stripe"></div><p><b>Cambio de fuente (25/08/2026):</b> ATOM dejó de entregar un export prefiltrado a la campaña de armado y ahora entrega el mes completo del flujo "Preventiva" — estas cifras no son comparables con versiones anteriores del informe.</p></div>
-        <div class="att-item amber"><div class="stripe"></div><p><b>Efectividad neta con nueva metodología (26/08/2026):</b> ahora mide todos los servicios de armado del mes (13.631), no solo los de clientes contactados por la campaña — reemplaza el cruce por cédula con ventana de 45 días.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>Tasa de armados no efectivos con nueva metodología (26/08/2026):</b> ahora mide todos los servicios de armado del mes (13.631), no solo los de clientes contactados por la campaña — reemplaza el cruce por cédula con ventana de 45 días.</p></div>
       </div>
     </section>
   </div>
@@ -456,10 +456,10 @@
           <div class="foot">4.389 de 8.983</div>
         </div>
         <div class="hero-card">
-          <div class="label">Efectividad neta del armado</div>
-          <div class="value">64,9%</div>
-          <span class="chip good">▲ +0,9 pp vs. junio</span>
-          <div class="foot">11.135 de 17.154 servicios</div>
+          <div class="label">Tasa de servicios de armados no efectivos</div>
+          <div class="value">35,1%</div>
+          <span class="chip good">▼ −0,9 pp vs. junio</span>
+          <div class="foot">6.019 de 17.154 servicios</div>
         </div>
         <div class="hero-card">
           <div class="label">Sin contacto</div>
@@ -518,10 +518,10 @@
           <div class="foot">3.426 de 6.845</div>
         </div>
         <div class="hero-card">
-          <div class="label">Efectividad neta del armado</div>
-          <div class="value">62,4%</div>
-          <span class="chip bad">▼ −2,5 pp vs. julio</span>
-          <div class="foot">7.969 de 12.774 servicios · corte parcial (199 registros aún abiertos)</div>
+          <div class="label">Tasa de servicios de armados no efectivos</div>
+          <div class="value">37,6%</div>
+          <span class="chip bad">▲ +2,5 pp vs. julio</span>
+          <div class="foot">4.805 de 12.774 servicios · corte parcial (199 registros aún abiertos)</div>
         </div>
         <div class="hero-card">
           <div class="label">Sin contacto</div>
@@ -576,7 +576,7 @@
           <div class="trio" id="ge-arm-trio-confirm"></div>
         </div>
         <div class="card">
-          <h3>Efectividad neta</h3>
+          <h3>Tasa de armados no efectivos</h3>
           <div class="trio" id="ge-arm-trio-efec"></div>
         </div>
       </div>
@@ -586,7 +586,7 @@
       <div class="section-head"><h2>Puntos de atención</h2></div>
       <div class="attention">
         <div class="att-item"><div class="stripe"></div><p><b>Contactabilidad y confirmación mejoran de forma consistente</b> (66,9% → 73,9% → 74,1%; 42,5% → 48,9% → 50,1%), impulsadas por la mejor recuperación del agente sobre los fallidos del bot (9,0% → 26,1% → 28,3%).</p></div>
-        <div class="att-item amber"><div class="stripe"></div><p><b>La efectividad neta se mantiene estable en junio-julio (64,0% → 64,9%) y cae en agosto (→ 62,4%)</b> — nueva metodología desde 26/08/2026 (todos los servicios de armado del mes, ya no solo los de clientes contactados por la campaña); la caída de agosto puede deberse al corte parcial.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>La tasa de armados no efectivos mejora levemente en junio-julio (36,0% → 35,1%) y sube en agosto (→ 37,6%)</b> — nueva metodología desde 26/08/2026 (todos los servicios de armado del mes, ya no solo los de clientes contactados por la campaña); la subida de agosto puede deberse al corte parcial.</p></div>
         <div class="att-item amber"><div class="stripe"></div><p><b>Cambia el líder del pareto entre junio y julio:</b> en junio lidera "cliente arma - llamada" (19,4%), en julio pasa a liderar "cliente cancela" (18,7%), que se mantiene arriba en agosto (23,7%).</p></div>
         <div class="att-item amber"><div class="stripe"></div><p><b>Costo por armado no efectivo en revisión (26/08/2026):</b> el dato de agosto del corte anterior ($5,15M, 249 casos) se identificó como incompleto; junio y julio aún no tienen archivo de tarifa. No se muestra cifra hasta recibir el dato corregido.</p></div>
       </div>
@@ -646,10 +646,10 @@ trio("ge-arm-trio-confirm", [
 ], { max: 50.1, color: "var(--s2)" });
 
 trio("ge-arm-trio-efec", [
-  { m: "Junio",  v: 64.0 },
-  { m: "Julio",  v: 64.9 },
-  { m: "Agosto", v: 62.4 }
-], { max: 64.9, color: "var(--s8)" });
+  { m: "Junio",  v: 36.0 },
+  { m: "Julio",  v: 35.1 },
+  { m: "Agosto", v: 37.6 }
+], { max: 37.6, color: "var(--s8)" });
 
 /* ---- tab wiring: independent groups (outer, entregas, armado) ---- */
 document.querySelectorAll(".tabbar button").forEach((btn) => {
