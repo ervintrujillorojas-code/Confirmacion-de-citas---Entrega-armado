@@ -331,7 +331,12 @@
     <p class="tab-intro">Junio (solo bot, sin programa de agente) → Julio → Agosto (corte parcial).</p>
 
     <section>
-      <div class="split">
+      <div class="split3">
+        <div class="card">
+          <h3>Contactabilidad del agente</h3>
+          <div class="sub">Junio no tiene cifra: el programa de agente no existía ese mes</div>
+          <div class="trio" id="ge-trio-contact"></div>
+        </div>
         <div class="card">
           <h3>Tasa de no efectivas (todos los canales)</h3>
           <div class="sub">Agosto sube por primera vez frente al mes anterior — se revierte la mejora continua que traía desde junio</div>
@@ -646,6 +651,12 @@ function trio(containerId, items, opts) {
     el.appendChild(col);
   });
 }
+
+trio("ge-trio-contact", [
+  { m: "Junio",  v: 0, na: true },
+  { m: "Julio",  v: 99.3 },
+  { m: "Agosto", v: 98.0 }
+], { max: 99.3, color: "var(--s2)" });
 
 trio("ge-trio-tasa", [
   { m: "Junio",  v: 6.82 },
