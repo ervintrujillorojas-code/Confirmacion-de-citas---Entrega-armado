@@ -394,7 +394,12 @@
           <span class="chip flat">3.207 de 7.541</span>
         </div>
         <div class="hero-card">
-          <div class="label">Tasa de servicios de armados no efectivos</div>
+          <div class="label">Efectividad de la gestión (de los contactados)</div>
+          <div class="value">67,0%</div>
+          <span class="chip flat">3.238 de 4.833 resueltos</span>
+        </div>
+        <div class="hero-card">
+          <div class="label">Tasa general de armados no efectivos</div>
           <div class="value">36,0%</div>
           <span class="chip flat">4.905 de 13.631 servicios</span>
         </div>
@@ -432,7 +437,7 @@
       <div class="attention">
         <div class="att-item"><div class="stripe"></div><p><b>Junio tiene la menor recuperación del agente (9,0%)</b> de los tres meses — el archivo de Gestión solo tenía registro del 25% de los fallidos de WhatsApp de junio, contra 70-75% en julio/agosto.</p></div>
         <div class="att-item amber"><div class="stripe"></div><p><b>Cambio de fuente (25/08/2026):</b> ATOM dejó de entregar un export prefiltrado a la campaña de armado y ahora entrega el mes completo del flujo "Preventiva" — estas cifras no son comparables con versiones anteriores del informe.</p></div>
-        <div class="att-item amber"><div class="stripe"></div><p><b>Tasa de armados no efectivos con nueva metodología (26/08/2026):</b> ahora mide todos los servicios de armado del mes (13.631), no solo los de clientes contactados por la campaña — reemplaza el cruce por cédula con ventana de 45 días.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>Dos indicadores de efectividad desde 26/08/2026:</b> "efectividad de la gestión" mide, de los contactados por la campaña, si terminaron con armado efectivo (cruce por cédula + ventana de 45 días); "tasa general de armados no efectivos" mide todos los servicios de armado del mes (13.631), hayan sido o no contactados. Son complementarios, no el mismo dato.</p></div>
       </div>
     </section>
   </div>
@@ -456,7 +461,13 @@
           <div class="foot">4.389 de 8.983</div>
         </div>
         <div class="hero-card">
-          <div class="label">Tasa de servicios de armados no efectivos</div>
+          <div class="label">Efectividad de la gestión (de los contactados)</div>
+          <div class="value">64,7%</div>
+          <span class="chip bad">▼ −2,3 pp vs. junio</span>
+          <div class="foot">4.092 de 6.321 resueltos</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Tasa general de armados no efectivos</div>
           <div class="value">35,1%</div>
           <span class="chip good">▼ −0,9 pp vs. junio</span>
           <div class="foot">6.019 de 17.154 servicios</div>
@@ -518,7 +529,13 @@
           <div class="foot">3.426 de 6.845</div>
         </div>
         <div class="hero-card">
-          <div class="label">Tasa de servicios de armados no efectivos</div>
+          <div class="label">Efectividad de la gestión (de los contactados)</div>
+          <div class="value">64,9%</div>
+          <span class="chip good">▲ +0,2 pp vs. julio</span>
+          <div class="foot">2.902 de 4.469 resueltos · 8,0% aún pendiente (el más alto de los tres meses)</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Tasa general de armados no efectivos</div>
           <div class="value">37,6%</div>
           <span class="chip bad">▲ +2,5 pp vs. julio</span>
           <div class="foot">4.805 de 12.774 servicios · corte parcial (199 registros aún abiertos)</div>
@@ -555,7 +572,7 @@
     <section>
       <div class="section-head"><h2>Puntos de atención</h2></div>
       <div class="attention">
-        <div class="att-item amber"><div class="stripe"></div><p><b>La efectividad neta cae por primera vez</b> (64,9% → 62,4%, −2,5 pp) — a confirmar si es una baja real o efecto del corte parcial (199 registros de agosto aún abiertos, no cerrados).</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>La tasa general de armados no efectivos sube por primera vez</b> (35,1% → 37,6%, +2,5 pp) — a confirmar si es una subida real o efecto del corte parcial (199 registros de agosto aún abiertos, no cerrados). La efectividad de la gestión, en cambio, mejora levemente (64,7% → 64,9%).</p></div>
         <div class="att-item amber"><div class="stripe"></div><p><b>"Cliente cancela" lidera con fuerza</b> (23,7% del no-efectivo, vs. 16,2% en junio) — sube cada mes.</p></div>
       </div>
     </section>
@@ -566,7 +583,7 @@
     <p class="tab-intro">Junio (01–28) → Julio (01–30) → Agosto (01–24, corte parcial). Metodología actualizada 25-26/08/2026 — export mensual completo del flujo Preventiva, ya no prefiltrado por campaña.</p>
 
     <section>
-      <div class="split3">
+      <div class="split">
         <div class="card">
           <h3>Contactabilidad</h3>
           <div class="trio" id="ge-arm-trio-contact"></div>
@@ -575,8 +592,17 @@
           <h3>Confirmación</h3>
           <div class="trio" id="ge-arm-trio-confirm"></div>
         </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
         <div class="card">
-          <h3>Tasa de armados no efectivos</h3>
+          <h3>Efectividad de la gestión (de los contactados)</h3>
+          <div class="trio" id="ge-arm-trio-gestion"></div>
+        </div>
+        <div class="card">
+          <h3>Tasa general de armados no efectivos</h3>
           <div class="trio" id="ge-arm-trio-efec"></div>
         </div>
       </div>
@@ -593,7 +619,7 @@
     </section>
   </div>
 
-  <div class="tab-footer">Fuente: <em>Auditorias de conversaciones ATOM/auditoria_de_las_conversaciones_{JUNIO,JULIO,AGOSTO} 2026.xlsx</em>, <em>Gestion de confirmacion de armado 2026.xlsx</em>, <em>Efectividad Junio-Julio-Agosto.xlsx</em>, <em>MANUAL DE CAUSALES.xlsx</em>. Corte: 26/08/2026 (junio 01-28 · julio 01-30 · agosto 01-24, corte parcial).</div>
+  <div class="tab-footer">Fuente: <em>Auditorias de conversaciones ATOM/auditoria_de_las_conversaciones_{JUNIO,JULIO,AGOSTO} 2026.xlsx</em>, <em>Gestion de confirmacion de armado 2026.xlsx</em>, <em>Detalle Armados_Datos completos_data (20).csv</em> (efectividad de la gestión), <em>Efectividad Junio-Julio-Agosto.xlsx</em> (tasa general), <em>MANUAL DE CAUSALES.xlsx</em>. Corte: 26/08/2026 (junio 01-28 · julio 01-30 · agosto 01-24, corte parcial).</div>
 
   </div><!-- /ge-armado -->
 
@@ -644,6 +670,12 @@ trio("ge-arm-trio-confirm", [
   { m: "Julio",  v: 48.9 },
   { m: "Agosto", v: 50.1 }
 ], { max: 50.1, color: "var(--s2)" });
+
+trio("ge-arm-trio-gestion", [
+  { m: "Junio",  v: 67.0 },
+  { m: "Julio",  v: 64.7 },
+  { m: "Agosto", v: 64.9 }
+], { max: 67.0, color: "var(--s2)" });
 
 trio("ge-arm-trio-efec", [
   { m: "Junio",  v: 36.0 },
