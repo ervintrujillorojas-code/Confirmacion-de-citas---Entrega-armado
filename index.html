@@ -376,79 +376,14 @@
   <div id="ge-armado" class="panel">
 
   <div class="tabbar" role="tablist">
-    <button type="button" class="active" data-group="armado" data-target="ge-arm-junio">Junio</button>
-    <button type="button" data-group="armado" data-target="ge-arm-julio">Julio</button>
+    <button type="button" class="active" data-group="armado" data-target="ge-arm-julio">Julio</button>
     <button type="button" data-group="armado" data-target="ge-arm-agosto">Agosto</button>
     <button type="button" data-group="armado" data-target="ge-arm-comparativo">Comparativo</button>
   </div>
 
-  <!-- ---- Armado / Junio ---- -->
-  <div id="ge-arm-junio" class="panel active">
-    <p class="tab-intro">Junio 2026 (01–28, mes completo) · 7.541 clientes únicos · métricas ahora por cliente único (cédula), no por envío.</p>
-
-    <section>
-      <div class="hero-grid">
-        <div class="hero-card">
-          <div class="label">Contactabilidad general (bot + agente)</div>
-          <div class="value">66,9%</div>
-          <span class="chip flat">5.046 de 7.541</span>
-        </div>
-        <div class="hero-card">
-          <div class="label">Confirmación general ("Sí, confirmo")</div>
-          <div class="value">42,5%</div>
-          <span class="chip flat">3.207 de 7.541</span>
-        </div>
-        <div class="hero-card">
-          <div class="label">Efectividad de la gestión (de los contactados)</div>
-          <div class="value">67,0%</div>
-          <span class="chip flat">3.238 de 4.833 resueltos</span>
-        </div>
-        <div class="hero-card">
-          <div class="label">Tasa general de armados no efectivos</div>
-          <div class="value">36,0%</div>
-          <span class="chip flat">4.905 de 13.631 servicios</span>
-        </div>
-        <div class="hero-card">
-          <div class="label">Sin contacto</div>
-          <div class="value">2.495</div>
-          <span class="chip bad">33,1% del total</span>
-          <div class="foot">Mes con menor recuperación del agente (9,0% de los que el bot no contactó)</div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="split">
-        <div class="card">
-          <h3>Causales principales — armados no efectivos</h3>
-          <div class="sub">Top 5 de 4.905 casos (73,2% del total)</div>
-          <div class="bar-row"><span class="lbl">Arma - llamada</span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--s8);"></div></div><span class="num">954</span></div>
-          <div class="bar-row"><span class="lbl">Armó el producto</span><div class="bar-track"><div class="bar-fill" style="width:99.0%; background:var(--s8);"></div></div><span class="num">944</span></div>
-          <div class="bar-row"><span class="lbl">Cliente cancela</span><div class="bar-track"><div class="bar-fill" style="width:83.5%; background:var(--s8);"></div></div><span class="num">797</span></div>
-          <div class="bar-row"><span class="lbl">Novedad</span><div class="bar-track"><div class="bar-fill" style="width:60.4%; background:var(--s8);"></div></div><span class="num">576</span></div>
-          <div class="bar-row"><span class="lbl">No quiso armado</span><div class="bar-track"><div class="bar-fill" style="width:34.7%; background:var(--s8);"></div></div><span class="num">331</span></div>
-        </div>
-        <div class="card">
-          <h3>Resultado del armado (13.631 servicios clasificados)</h3>
-          <div class="sub">Todos los servicios de armado con FEC_REAL en el mes (excluye no aplica/sin clasificar)</div>
-          <div class="bar-row"><span class="lbl">Efectivo</span><div class="bar-track"><div class="bar-fill" style="width:64.0%; background:var(--good);"></div></div><span class="num">8.726</span></div>
-          <div class="bar-row"><span class="lbl">No efectivo</span><div class="bar-track"><div class="bar-fill" style="width:36.0%; background:var(--bad);"></div></div><span class="num">4.905</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-head"><h2>Puntos de atención</h2></div>
-      <div class="attention">
-        <div class="att-item"><div class="stripe"></div><p><b>Junio tiene la menor recuperación del agente (9,0%)</b> de los tres meses — el archivo de Gestión solo tenía registro del 25% de los fallidos de WhatsApp de junio, contra 70-75% en julio/agosto.</p></div>
-        <div class="att-item amber"><div class="stripe"></div><p><b>Cambio de fuente (25/08/2026):</b> ATOM dejó de entregar un export prefiltrado a la campaña de armado y ahora entrega el mes completo del flujo "Preventiva" — estas cifras no son comparables con versiones anteriores del informe.</p></div>
-        <div class="att-item amber"><div class="stripe"></div><p><b>Dos indicadores de efectividad desde 26/08/2026:</b> "efectividad de la gestión" mide, de los contactados por la campaña, si terminaron con armado efectivo (cruce por cédula + ventana de 45 días); "tasa general de armados no efectivos" mide todos los servicios de armado del mes (13.631), hayan sido o no contactados. Son complementarios, no el mismo dato.</p></div>
-      </div>
-    </section>
-  </div>
 
   <!-- ---- Armado / Julio ---- -->
-  <div id="ge-arm-julio" class="panel">
+  <div id="ge-arm-julio" class="panel active">
     <p class="tab-intro">Julio 2026 (01–30, mes completo) · 9.261 clientes únicos.</p>
 
     <section>
@@ -598,7 +533,7 @@
 
   <!-- ---- Armado / Comparativo ---- -->
   <div id="ge-arm-comparativo" class="panel">
-    <p class="tab-intro">Junio (01–28) → Julio (01–30) → Agosto (01–24, corte parcial). Metodología actualizada 25-26/08/2026 — export mensual completo del flujo Preventiva, ya no prefiltrado por campaña.</p>
+    <p class="tab-intro">Julio (01–30) → Agosto (01–31, mes completo). Metodología actualizada 02/09/2026 — export mensual completo del flujo Preventiva, ya no prefiltrado por campaña. Junio queda documentado en el dashboard detallado y el README, fuera de este comparativo.</p>
 
     <section>
       <div class="split">
@@ -633,21 +568,21 @@
         <div class="fin-card"><div class="label">Mes que alcanza la meta (90%)</div><div class="value">Enero 2027</div><div class="foot">Rampa: 65%→70%→75%→80%→85%→90%</div></div>
         <div class="fin-card"><div class="label">Impacto neto acumulado (13 meses)</div><div class="value">$903.281.296</div><div class="foot">Ahorro bruto $943,9M − costo del agente $40,6M</div></div>
       </div>
-      <p class="sub" style="margin-top:10px;">Fuente: <em>Proyeccion bussines case - armado.xlsx</em>. Compara el costo bajo un escenario base (efectividad general estable en ~65,5%) contra un objetivo con agente dedicado ($3.125.000/mes) que sube la efectividad progresivamente. Junio y julio no tienen cifra: el programa aún no existía. Ver dashboard detallado para la tabla mes a mes completa.</p>
+      <p class="sub" style="margin-top:10px;">Fuente: <em>Proyeccion bussines case - armado.xlsx</em>. Compara el costo bajo un escenario base (efectividad general estable en ~65,5%) contra un objetivo con agente dedicado ($3.125.000/mes) que sube la efectividad progresivamente. Julio no tiene cifra en esta tabla: el programa aún no existía. Ver dashboard detallado para la tabla mes a mes completa.</p>
     </section>
 
     <section>
       <div class="section-head"><h2>Puntos de atención</h2></div>
       <div class="attention">
-        <div class="att-item"><div class="stripe"></div><p><b>Contactabilidad y confirmación mejoran de junio a agosto, con julio irregular</b> (66,9% → 71,3% → 75,6%; 42,5% → 48,3% → 50,9%) — impulsadas por la recuperación del agente sobre los fallidos del bot, que da un salto grande pero no lineal (9,0% → 18,5% → 32,6%).</p></div>
-        <div class="att-item amber"><div class="stripe"></div><p><b>La tasa de armados no efectivos mejora levemente en junio-julio (36,0% → 35,0%) y sube en agosto (→ 36,8%)</b> — todos los servicios de armado del mes, ya no solo los de clientes contactados por la campaña; con agosto ya como mes completo (01-31), se confirma que la subida es real, no un efecto del corte parcial que se manejaba antes. La efectividad de la gestión (de los contactados) va en la misma dirección: 67,0% → 64,8% → 62,9%.</p></div>
-        <div class="att-item amber"><div class="stripe"></div><p><b>Cambia el líder del pareto entre junio y julio:</b> en junio lidera "cliente arma - llamada" (19,4%), en julio pasa a liderar "cliente cancela" (18,6%), que se mantiene arriba en agosto (24,7%).</p></div>
+        <div class="att-item"><div class="stripe"></div><p><b>Contactabilidad y confirmación mejoran de julio a agosto</b> (71,3% → 75,6%; 48,3% → 50,9%) — impulsadas por la recuperación del agente sobre los fallidos del bot (18,5% → 32,6%).</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>La tasa de armados no efectivos sube en agosto</b> (35,0% → 36,8%) — todos los servicios de armado del mes, ya no solo los de clientes contactados por la campaña; con agosto ya como mes completo (01-31), se confirma que la subida es real, no un efecto del corte parcial que se manejaba antes. La efectividad de la gestión (de los contactados) va en la misma dirección: 64,8% → 62,9%.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>"Cliente cancela" lidera el pareto de agosto</b> (24,7%, sube frente al 18,6% de julio).</p></div>
         <div class="att-item amber"><div class="stripe"></div><p><b>Costo por armado no efectivo, nueva fórmula (02/09/2026):</b> el costo real de agosto ($135,76M, 6.448 casos, 85% a $15.020 + 15% a $55.251) superó la referencia del business case ($119,99M) — ahorro neto negativo, -$18,89M. Ver pestaña Agosto.</p></div>
       </div>
     </section>
   </div>
 
-  <div class="tab-footer">Fuente: <em>Auditorias de conversaciones ATOM/auditoria_de_las_conversaciones_{JUNIO,JULIO,AGOSTO} 2026.xlsx</em>, <em>Gestion de confirmacion de armado 2026.xlsx</em> (efectividad de la gestión), <em>Detalle armados/Detalle Armados {Julio,Agosto} 2026.xlsx</em> y <em>Efectividad Junio-Julio-Agosto.xlsx</em> (tasa general), <em>Proyeccion bussines case - armado.xlsx</em> (impacto económico), <em>MANUAL DE CAUSALES.xlsx</em>. Corte: 02/09/2026 — junio, julio y agosto ya son los tres meses completos en las cuatro secciones.</div>
+  <div class="tab-footer">Fuente: <em>Auditorias de conversaciones ATOM/auditoria_de_las_conversaciones_{JULIO,AGOSTO} 2026.xlsx</em>, <em>Gestion de confirmacion de armado 2026.xlsx</em> (efectividad de la gestión), <em>Detalle armados/Detalle Armados {Julio,Agosto} 2026.xlsx</em> y <em>Efectividad Junio-Julio-Agosto.xlsx</em> (tasa general), <em>Proyeccion bussines case - armado.xlsx</em> (impacto económico), <em>MANUAL DE CAUSALES.xlsx</em>. Corte: 02/09/2026 — julio y agosto ya son los dos meses completos en las cuatro secciones. Junio queda documentado en el dashboard detallado y el README.</div>
 
   </div><!-- /ge-armado -->
 
@@ -694,25 +629,21 @@ trio("ge-trio-efec", [
 ], { max: 95.0, color: "var(--s1)" });
 
 trio("ge-arm-trio-contact", [
-  { m: "Junio",  v: 66.9 },
   { m: "Julio",  v: 71.3 },
   { m: "Agosto", v: 75.6 }
 ], { max: 75.6, color: "var(--s1)" });
 
 trio("ge-arm-trio-confirm", [
-  { m: "Junio",  v: 42.5 },
   { m: "Julio",  v: 48.3 },
   { m: "Agosto", v: 50.9 }
 ], { max: 50.9, color: "var(--s2)" });
 
 trio("ge-arm-trio-gestion", [
-  { m: "Junio",  v: 67.0 },
   { m: "Julio",  v: 64.8 },
   { m: "Agosto", v: 62.9 }
 ], { max: 67.0, color: "var(--s2)" });
 
 trio("ge-arm-trio-efec", [
-  { m: "Junio",  v: 36.0 },
   { m: "Julio",  v: 35.0 },
   { m: "Agosto", v: 36.8 }
 ], { max: 36.8, color: "var(--s8)" });
