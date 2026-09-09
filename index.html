@@ -163,7 +163,7 @@
     <h1>Confirmación de citas — entrega y armado</h1>
     <p class="dek">Resumen ejecutivo de las dos gestiones del programa de confirmación (bot + agente). Se reportan por separado — no son comparables entre sí. Para el desglose completo por causal, subcausal y departamento, ver <em>Dashboard Efectividad Gestion Bot.html</em>.</p>
     <div class="meta">
-      <span><b>Emitido:</b> 26/08/2026</span>
+      <span><b>Emitido:</b> 09/09/2026</span>
     </div>
   </header>
 
@@ -178,6 +178,7 @@
   <div class="tabbar" role="tablist">
     <button type="button" class="active" data-group="entregas" data-target="ge-ent-julio">Julio</button>
     <button type="button" data-group="entregas" data-target="ge-ent-agosto">Agosto</button>
+    <button type="button" data-group="entregas" data-target="ge-ent-septiembre">Septiembre</button>
     <button type="button" data-group="entregas" data-target="ge-ent-comparativo">Comparativo</button>
   </div>
 
@@ -326,9 +327,83 @@
     </section>
   </div>
 
+  <!-- ---- Entregas / Septiembre ---- -->
+  <div id="ge-ent-septiembre" class="panel">
+    <p class="tab-intro">Septiembre 2026 (1–7, <b>corte parcial</b>) · 2.257 operaciones únicas · 960 gestionadas por el agente.</p>
+
+    <section>
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="label">Contactabilidad del agente</div>
+          <div class="value">94,3%</div>
+          <span class="chip bad">▼ −3,0 pp vs. agosto</span>
+          <div class="foot">905 de 960 · 0 "sin gestión" — los 55 no contactados están repartidos en los 5 días del corte, no es rezago</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Efectividad general de la gestión</div>
+          <div class="value">97,0%</div>
+          <span class="chip good">▲ +2,0 pp vs. agosto</span>
+          <div class="foot">2.189 de 2.257 operaciones — muestra chica, corte parcial</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Tasa de no efectivas (todos los canales)</div>
+          <div class="value">4,97%</div>
+          <span class="chip good">▼ −1,16 pp vs. agosto</span>
+          <div class="foot">130 de 2.616 despachos (1-7)</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Ahorro neto logrado — septiembre (parcial)</div>
+          <div class="value">$1,20M</div>
+          <span class="chip flat">Bruto $4,32M − costo del agente $3,13M (mes completo)</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div class="card">
+          <h3>Bot vs. gestión del agente</h3>
+          <div class="sub">Efectividad de la entrega según quién logró la confirmación — muestra chica</div>
+          <div class="bar-row"><span class="lbl">Bot</span><div class="bar-track"><div class="bar-fill" style="width:97.1%; background:var(--s1);"></div></div><span class="num">97,1%</span></div>
+          <div class="bar-row"><span class="lbl">Agente</span><div class="bar-track"><div class="bar-fill" style="width:97.3%; background:var(--s2);"></div></div><span class="num">97,3%</span></div>
+          <div class="sub" style="margin-top:8px; margin-bottom:0;">Brecha de 0,2 pp a favor del agente — muy estrecha, a vigilar con más volumen</div>
+        </div>
+        <div class="card">
+          <h3>Causales principales — no efectivas del agente</h3>
+          <div class="sub">Top 5 de 26 casos (80,8% del total) — muestra chica</div>
+          <div class="bar-row"><span class="lbl">Desiste compra</span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--s8);"></div></div><span class="num">7</span></div>
+          <div class="bar-row"><span class="lbl">Cliente no recibe</span><div class="bar-track"><div class="bar-fill" style="width:71.4%; background:var(--s8);"></div></div><span class="num">5</span></div>
+          <div class="bar-row"><span class="lbl">Contacto no efec.</span><div class="bar-track"><div class="bar-fill" style="width:42.9%; background:var(--s8);"></div></div><span class="num">3</span></div>
+          <div class="bar-row"><span class="lbl">Dirección errada</span><div class="bar-track"><div class="bar-fill" style="width:42.9%; background:var(--s8);"></div></div><span class="num">3</span></div>
+          <div class="bar-row"><span class="lbl">Error asesoría</span><div class="bar-track"><div class="bar-fill" style="width:42.9%; background:var(--s8);"></div></div><span class="num">3</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Impacto económico</h2></div>
+      <div class="fin-strip">
+        <div class="fin-card"><div class="label">Impacto esperado — proyección business case</div><div class="value">$6.538.764</div><div class="foot">Ya sin el costo único de equipo; ahorro esperado en costo de despachos: $9.663.764</div></div>
+        <div class="fin-card"><div class="label">Costo real de las no efectivas</div><div class="value">$11.700.000</div><div class="foot">130 × $90.000</div></div>
+        <div class="fin-card"><div class="label">Ahorro neto logrado — septiembre (parcial)</div><div class="value">$1.195.000</div><div class="foot">Bruto $4.320.000 (vs. tasa de referencia, 6,82%) − costo del agente $3.125.000</div></div>
+        <div class="fin-card"><div class="label">Costo del agente — septiembre</div><div class="value">$3.125.000</div><div class="foot">Salario + licencia, valor mensual completo aunque el corte sea parcial</div></div>
+      </div>
+      <p class="sub" style="margin-top:10px;">Corte parcial (1-7): estas cifras subirán a medida que avance el mes. Proyección lineal de ahorro bruto a cierre de septiembre: ≈$18.514.286 (ver dashboard detallado).</p>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Puntos de atención</h2></div>
+      <div class="attention">
+        <div class="att-item amber"><div class="stripe"></div><p><b>Corte muy parcial (1-7, 2.257 operaciones vs. 10.715 de agosto)</b> — todas las cifras de esta pestaña son preliminares y pueden moverse bastante al ampliar el corte.</p></div>
+        <div class="att-item"><div class="stripe"></div><p><b>La contactabilidad baja a 94,3% pero no parece rezago:</b> los 55 casos "no contactado" están repartidos en los 5 días del corte (5 a 17 por día), no concentrados en el día más reciente — a diferencia del episodio del 19/08 en agosto.</p></div>
+        <div class="att-item"><div class="stripe"></div><p><b>09/09:</b> primer corte de septiembre — la tasa de no efectivas (todos los canales) mejora a 4,97%, la más baja de los cuatro meses, sobre una muestra chica (2.616 despachos).</p></div>
+      </div>
+    </section>
+  </div>
+
   <!-- ---- Entregas / Comparativo ---- -->
   <div id="ge-ent-comparativo" class="panel">
-    <p class="tab-intro">Junio (solo bot, sin programa de agente) → Julio → Agosto — los tres meses completos.</p>
+    <p class="tab-intro">Junio (solo bot, sin programa de agente) → Julio → Agosto (meses completos) → Septiembre (corte parcial 1-7).</p>
 
     <section>
       <div class="split3">
@@ -355,21 +430,22 @@
       <div class="fin-strip">
         <div class="fin-card"><div class="label">Ahorro neto — Julio</div><div class="value">$5.635.618</div><div class="foot">Bruto $13.260.618 (vs. tasa de referencia, 6,82%) − costo del agente $7.625.000</div></div>
         <div class="fin-card"><div class="label">Ahorro neto — Agosto</div><div class="value">$5.605.000</div><div class="foot">Bruto $8.730.000 (vs. tasa de referencia, 6,82%) − costo del agente $3.125.000</div></div>
-        <div class="fin-card"><div class="label">Total neto — Julio + Agosto</div><div class="value">$11.240.618</div><div class="foot">Suma de los dos ahorros netos mensuales</div></div>
+        <div class="fin-card"><div class="label">Ahorro neto — Septiembre (parcial)</div><div class="value">$1.195.000</div><div class="foot">Bruto $4.320.000 (vs. tasa de referencia, 6,82%) − costo del agente $3.125.000</div></div>
+        <div class="fin-card"><div class="label">Total neto — Julio + Agosto + Septiembre</div><div class="value">$12.435.618</div><div class="foot">Suma de los tres ahorros netos (septiembre aún parcial, subirá)</div></div>
       </div>
     </section>
 
     <section>
       <div class="section-head"><h2>Puntos de atención</h2></div>
       <div class="attention">
-        <div class="att-item amber"><div class="stripe"></div><p><b>El indicador general de no efectivas sube por tercer corte consecutivo</b> (5,84% → 6,13%, +0,29 pp) — sigue por debajo de la referencia de junio (6,82%), pero la racha de mejora continua no se recuperó al cerrar el mes.</p></div>
-        <div class="att-item"><div class="stripe"></div><p><b>Con el mes completo, los dos cortes de agosto vuelven a coincidir en fecha:</b> la gestión bot+agente y el contexto general de despachos cubren ambos el 1-31.</p></div>
-        <div class="att-item"><div class="stripe"></div><p><b>La confirmación bot+agente sube de 97,2% a 98,9%</b> (+1,7 pp) con el mes completo de agosto — el nivel logrado en julio se sostiene y mejora.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>El indicador general de no efectivas sube por tercer corte consecutivo en agosto</b> (5,84% → 6,13%, +0,29 pp) antes de revertir en el primer corte de septiembre (4,97%, -1,16 pp) — sigue por debajo de la referencia de junio (6,82%) en los tres meses.</p></div>
+        <div class="att-item"><div class="stripe"></div><p><b>Con el mes completo, los dos cortes de agosto coinciden en fecha</b> (1-31); en septiembre también coinciden, ambos en el corte parcial 1-7.</p></div>
+        <div class="att-item"><div class="stripe"></div><p><b>La confirmación bot+agente sube de 97,2% a 98,9%</b> (+1,7 pp) con el mes completo de agosto, y baja a 94,8% en el primer corte de septiembre — corte de solo 7 días, con más peso relativo de los registros sin dato de canal completo, a vigilar con más volumen.</p></div>
       </div>
     </section>
   </div>
 
-  <div class="tab-footer">Fuente: <em>Gestión confirmacion de citas 2026.xlsx</em>, <em>Entregas no efectivas [mes] 2026.xlsx</em>, <em>Entregas no efectivas junio vs julio 2026.docx</em>. Costo por entrega no efectiva: $90.000. Línea base de referencia: junio (6,82%).</div>
+  <div class="tab-footer">Fuente: <em>Gestión confirmacion de citas 2026.xlsx</em>, <em>Entregas no efectivas [mes] 2026.xlsx</em>, <em>Entregas no efectivas 2026.docx</em>. Costo por entrega no efectiva: $90.000. Línea base de referencia: junio (6,82%). Septiembre es corte parcial (1-7).</div>
 
   </div><!-- /ge-entregas -->
 
@@ -631,20 +707,23 @@ function trio(containerId, items, opts) {
 trio("ge-trio-contact", [
   { m: "Junio",  v: 0, na: true },
   { m: "Julio",  v: 99.3 },
-  { m: "Agosto", v: 97.3 }
+  { m: "Agosto", v: 97.3 },
+  { m: "Sep.",   v: 94.3 }
 ], { max: 99.3, color: "var(--s2)" });
 
 trio("ge-trio-tasa", [
   { m: "Junio",  v: 6.82 },
   { m: "Julio",  v: 5.84 },
-  { m: "Agosto", v: 6.13 }
+  { m: "Agosto", v: 6.13 },
+  { m: "Sep.",   v: 4.97 }
 ], { max: 6.82, color: "var(--s8)" });
 
 trio("ge-trio-efec", [
   { m: "Junio",  v: 0, na: true },
   { m: "Julio",  v: 93.9 },
-  { m: "Agosto", v: 95.0 }
-], { max: 95.0, color: "var(--s1)" });
+  { m: "Agosto", v: 95.0 },
+  { m: "Sep.",   v: 97.0 }
+], { max: 97.0, color: "var(--s1)" });
 
 trio("ge-arm-trio-contact", [
   { m: "Julio",  v: 71.3 },
