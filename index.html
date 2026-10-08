@@ -151,6 +151,24 @@
   .trend td.delta { padding-right: 0; }
   .trend td.delta .chip { margin-top: 0; }
 
+  /* ---- comparativo: barras verticales, una columna por mes ---- */
+  .cmp-grid { display: grid; grid-template-columns: repeat(var(--c, 3), minmax(0, 1fr)); gap: 14px; }
+  @media (max-width: 900px) { .cmp-grid { grid-template-columns: 1fr; } }
+  .cmp-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 4px; }
+  .cmp-head h3 { margin: 0; }
+  .cmp-last { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+  .cmp-last b { font-size: 22px; font-weight: 750; line-height: 1; }
+  .cmp-last .chip { margin-top: 4px; }
+  .cols { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 10px; height: 170px; margin-top: 14px; align-items: end; }
+  .col { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; min-width: 0; }
+  .col .v { font-size: 11.5px; font-weight: 700; color: var(--ink-2); margin-bottom: 5px; white-space: nowrap; }
+  .col .v.na { color: var(--muted); font-weight: 400; }
+  .col .b { width: 100%; max-width: 46px; border-radius: 6px 6px 0 0; background: var(--info); flex-shrink: 0; }
+  .col.last .b { background: var(--s1); }
+  .col.last .v { color: var(--ink); }
+  .col .m { font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .cmp .scale { font-size: 10.5px; color: var(--muted); margin-top: 8px; }
+
   /* ---- attention panel ---- */
   .attention { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 4px 0; overflow: hidden; }
   .att-item { display: grid; grid-template-columns: 4px 1fr; gap: 14px; padding: 13px 20px; }
@@ -173,8 +191,8 @@
     <h1>Confirmación de citas — entrega y armado</h1>
     <p class="dek">Resumen ejecutivo de las dos gestiones del programa de confirmación (bot + agente). Cada gestión se reporta por separado.</p>
     <div class="meta">
-      <span><b>Emitido:</b> 30/09/2026</span>
-      <span><b>Septiembre:</b> corte parcial</span>
+      <span><b>Emitido:</b> 07/10/2026</span>
+      <span><b>Octubre:</b> corte parcial</span>
     </div>
   </header>
 
@@ -190,6 +208,7 @@
     <button type="button" class="active" data-group="entregas" data-target="ge-ent-julio">Julio</button>
     <button type="button" data-group="entregas" data-target="ge-ent-agosto">Agosto</button>
     <button type="button" data-group="entregas" data-target="ge-ent-septiembre">Septiembre</button>
+    <button type="button" data-group="entregas" data-target="ge-ent-octubre">Octubre</button>
     <button type="button" data-group="entregas" data-target="ge-ent-comparativo">Comparativo</button>
   </div>
 
@@ -338,7 +357,7 @@
 
   <!-- ---- Entregas / Septiembre ---- -->
   <div id="ge-ent-septiembre" class="panel">
-    <p class="tab-intro">Septiembre 2026 · corte parcial 1 al 29 · 9.648 operaciones · 4.111 gestionadas por el agente</p>
+    <p class="tab-intro">Septiembre 2026 · mes completo · 9.950 operaciones · 4.237 gestionadas por el agente</p>
 
     <section>
       <div class="hero-grid">
@@ -346,24 +365,25 @@
           <div class="label">Contactabilidad del agente</div>
           <div class="value">96,9%</div>
           <span class="chip bad">▼ −0,4 pp vs. agosto</span>
-          <div class="foot">3.983 de 4.111 clientes</div>
+          <div class="foot">4.106 de 4.237 clientes</div>
         </div>
         <div class="hero-card">
           <div class="label">Efectividad de la gestión</div>
-          <div class="value">95,2%</div>
-          <span class="chip good">▲ +0,2 pp vs. agosto</span>
-          <div class="foot">9.187 de 9.648 entregadas</div>
+          <div class="value">94,9%</div>
+          <span class="chip bad">▼ −0,1 pp vs. agosto</span>
+          <div class="foot">9.438 de 9.950 entregadas</div>
         </div>
         <div class="hero-card">
           <div class="label">Entregas efectivas</div>
-          <div class="value">94,4%</div>
-          <span class="chip good">▲ +0,5 pp vs. agosto</span>
-          <div class="foot">11.354 de 12.030 despachos</div>
+          <div class="value">94,1%</div>
+          <span class="chip good">▲ +0,2 pp vs. agosto</span>
+          <div class="foot">11.937 de 12.685 despachos</div>
         </div>
         <div class="hero-card">
           <div class="label">Ahorro neto — septiembre</div>
-          <div class="value">$9,88M</div>
-          <div class="foot">Bruto $13,00M − agente $3,13M · parcial</div>
+          <div class="value">$7,42M</div>
+          
+          <div class="foot">Bruto $10,54M − agente $3,13M</div>
         </div>
       </div>
     </section>
@@ -373,18 +393,18 @@
         <div class="card">
           <h3>Bot vs. agente</h3>
           <div class="sub">Efectividad de la entrega según quién confirmó</div>
-          <div class="bar-row"><span class="lbl">Bot</span><div class="bar-track"><div class="bar-fill" style="width:95.6%; background:var(--s1);"></div></div><span class="num">95,6%</span></div>
-          <div class="bar-row"><span class="lbl">Agente</span><div class="bar-track"><div class="bar-fill" style="width:94.7%; background:var(--s2);"></div></div><span class="num">94,7%</span></div>
-          <div class="sub after">Brecha de 0,9 pp a favor del bot</div>
+          <div class="bar-row"><span class="lbl">Bot</span><div class="bar-track"><div class="bar-fill" style="width:95.3%; background:var(--s1);"></div></div><span class="num">95,3%</span></div>
+          <div class="bar-row"><span class="lbl">Agente</span><div class="bar-track"><div class="bar-fill" style="width:94.3%; background:var(--s2);"></div></div><span class="num">94,3%</span></div>
+          <div class="sub after">Brecha de 1,0 pp a favor del bot</div>
         </div>
         <div class="card">
           <h3>Principales causales — no efectivas del agente</h3>
-          <div class="sub">Top 5 de 216 casos (85,6%)</div>
-          <div class="bar-row"><span class="lbl">Contacto no efec.</span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--s8);"></div></div><span class="num">53</span></div>
-          <div class="bar-row"><span class="lbl">Cliente no recibe</span><div class="bar-track"><div class="bar-fill" style="width:86.8%; background:var(--s8);"></div></div><span class="num">46</span></div>
-          <div class="bar-row"><span class="lbl">Desiste compra</span><div class="bar-track"><div class="bar-fill" style="width:81.1%; background:var(--s8);"></div></div><span class="num">43</span></div>
-          <div class="bar-row"><span class="lbl">Error asesoría</span><div class="bar-track"><div class="bar-fill" style="width:50.9%; background:var(--s8);"></div></div><span class="num">27</span></div>
-          <div class="bar-row"><span class="lbl">Dirección errada</span><div class="bar-track"><div class="bar-fill" style="width:30.2%; background:var(--s8);"></div></div><span class="num">16</span></div>
+          <div class="sub">Top 5 de 241 casos (87,6%)</div>
+          <div class="bar-row"><span class="lbl">Contacto no efec.</span><div class="bar-track"><div class="bar-fill" style="width:100.0%; background:var(--s8);"></div></div><span class="num">67</span></div>
+          <div class="bar-row"><span class="lbl">Cliente no recibe</span><div class="bar-track"><div class="bar-fill" style="width:74.6%; background:var(--s8);"></div></div><span class="num">50</span></div>
+          <div class="bar-row"><span class="lbl">Desiste compra</span><div class="bar-track"><div class="bar-fill" style="width:71.6%; background:var(--s8);"></div></div><span class="num">48</span></div>
+          <div class="bar-row"><span class="lbl">Error asesoría</span><div class="bar-track"><div class="bar-fill" style="width:41.8%; background:var(--s8);"></div></div><span class="num">28</span></div>
+          <div class="bar-row"><span class="lbl">Dirección errada</span><div class="bar-track"><div class="bar-fill" style="width:26.9%; background:var(--s8);"></div></div><span class="num">18</span></div>
         </div>
       </div>
     </section>
@@ -392,10 +412,84 @@
     <section>
       <div class="section-head"><h2>Impacto económico</h2></div>
       <div class="fin-strip">
-        <div class="fin-card"><div class="label">Impacto esperado (business case)</div><div class="value">$6,54M</div><div class="foot">Proyección del mes completo</div></div>
-        <div class="fin-card"><div class="label">Costo estimado de las no efectivas</div><div class="value">$60,84M</div><div class="foot">676 × $90.000</div></div>
-        <div class="fin-card"><div class="label">Ahorro neto — septiembre</div><div class="value">$9,88M</div><div class="foot">Bruto $13,00M − agente $3,13M</div></div>
+        <div class="fin-card"><div class="label">Impacto esperado (business case)</div><div class="value">$6,54M</div><div class="foot">Proyección del mes</div></div>
+        <div class="fin-card"><div class="label">Costo estimado de las no efectivas</div><div class="value">$67,32M</div><div class="foot">748 × $90.000</div></div>
+        <div class="fin-card"><div class="label">Ahorro neto — septiembre</div><div class="value">$7,42M</div><div class="foot">Bruto $10,54M − agente $3,13M</div></div>
         <div class="fin-card"><div class="label">Costo del agente — septiembre</div><div class="value">$3,13M</div><div class="foot">Salario + licencia</div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Puntos de atención</h2></div>
+      <div class="attention">
+        <div class="att-item good"><div class="stripe"></div><p><b>Las entregas efectivas cierran en 94,1%</b>, por encima de agosto (93,9%) y de junio (93,2%).</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>"Contacto no efectivo" lidera las no efectivas del agente (27,8%)</b> — 231 de 241 eran clientes ya contactados: el problema está en la coordinación de la entrega.</p></div>
+        <div class="att-item bad"><div class="stripe"></div><p><b>Antioquia cierra como el departamento con menor efectividad (92,7%)</b>, seguido de Cundinamarca (94,2%) y Atlántico (94,3%).</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Entregas / Octubre ---- -->
+  <div id="ge-ent-octubre" class="panel">
+    <p class="tab-intro">Octubre 2026 · corte parcial 1 al 6 · 2.675 operaciones · 1.174 gestionadas por el agente</p>
+
+    <section>
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="label">Contactabilidad del agente</div>
+          <div class="value">96,6%</div>
+          <span class="chip bad">▼ −0,3 pp vs. septiembre</span>
+          <div class="foot">1.134 de 1.174 clientes</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Efectividad de la gestión</div>
+          <div class="value">97,3%</div>
+          <span class="chip good">▲ +2,4 pp vs. septiembre</span>
+          <div class="foot">2.602 de 2.675 entregadas</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Entregas efectivas</div>
+          <div class="value">95,1%</div>
+          <span class="chip good">▲ +1,0 pp vs. septiembre</span>
+          <div class="foot">2.315 de 2.435 despachos</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Ahorro neto — octubre</div>
+          <div class="value">$1,02M</div>
+          
+          <div class="foot">Bruto $4,15M − agente $3,13M · parcial</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div class="card">
+          <h3>Bot vs. agente</h3>
+          <div class="sub">Efectividad de la entrega según quién confirmó</div>
+          <div class="bar-row"><span class="lbl">Bot</span><div class="bar-track"><div class="bar-fill" style="width:97.3%; background:var(--s1);"></div></div><span class="num">97,3%</span></div>
+          <div class="bar-row"><span class="lbl">Agente</span><div class="bar-track"><div class="bar-fill" style="width:97.2%; background:var(--s2);"></div></div><span class="num">97,2%</span></div>
+          <div class="sub after">Brecha de 0,1 pp a favor del bot</div>
+        </div>
+        <div class="card">
+          <h3>Principales causales — no efectivas del agente</h3>
+          <div class="sub">Top 5 de 33 casos (78,8%)</div>
+          <div class="bar-row"><span class="lbl">Contacto no efec.</span><div class="bar-track"><div class="bar-fill" style="width:100.0%; background:var(--s8);"></div></div><span class="num">11</span></div>
+          <div class="bar-row"><span class="lbl">Sin causal aún</span><div class="bar-track"><div class="bar-fill" style="width:45.5%; background:var(--s8);"></div></div><span class="num">5</span></div>
+          <div class="bar-row"><span class="lbl">Cliente no recibe</span><div class="bar-track"><div class="bar-fill" style="width:45.5%; background:var(--s8);"></div></div><span class="num">5</span></div>
+          <div class="bar-row"><span class="lbl">Error asesoría</span><div class="bar-track"><div class="bar-fill" style="width:27.3%; background:var(--s8);"></div></div><span class="num">3</span></div>
+          <div class="bar-row"><span class="lbl">Desiste compra</span><div class="bar-track"><div class="bar-fill" style="width:18.2%; background:var(--s8);"></div></div><span class="num">2</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Impacto económico</h2></div>
+      <div class="fin-strip">
+        <div class="fin-card"><div class="label">Impacto esperado (business case)</div><div class="value">$20,41M</div><div class="foot">Proyección del mes completo</div></div>
+        <div class="fin-card"><div class="label">Costo estimado de las no efectivas</div><div class="value">$10,80M</div><div class="foot">120 × $90.000</div></div>
+        <div class="fin-card"><div class="label">Ahorro neto — octubre</div><div class="value">$1,02M</div><div class="foot">Bruto $4,15M − agente $3,13M</div></div>
+        <div class="fin-card"><div class="label">Costo del agente — octubre</div><div class="value">$3,13M</div><div class="foot">Salario + licencia</div></div>
       </div>
       <p class="note">Corte parcial: las cifras pueden cambiar al cierre del mes.</p>
     </section>
@@ -403,27 +497,43 @@
     <section>
       <div class="section-head"><h2>Puntos de atención</h2></div>
       <div class="attention">
-        <div class="att-item good"><div class="stripe"></div><p><b>Las entregas efectivas suben a 94,4%</b>, por encima de agosto (93,9%) y de junio (93,2%).</p></div>
-        <div class="att-item amber"><div class="stripe"></div><p><b>"Contacto no efectivo" lidera las no efectivas del agente (24,5%)</b> — 207 de 216 eran clientes ya contactados: el problema está en la coordinación de la entrega.</p></div>
-        <div class="att-item bad"><div class="stripe"></div><p><b>Antioquia sigue bajando (93,1%)</b> y es el departamento con menor efectividad.</p></div>
+        <div class="att-item good"><div class="stripe"></div><p><b>Octubre arranca con las entregas efectivas en 95,1%</b>, la mejor tasa de la serie — es la primera semana, a confirmar.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>La efectividad de la gestión (97,3%) bajará al llegar más no efectivas:</b> septiembre arrancó en 97,0% y cerró en 94,9%.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>"Contacto no efectivo" sigue liderando</b> las no efectivas del agente (33,3%).</p></div>
       </div>
     </section>
   </div>
 
   <!-- ---- Entregas / Comparativo ---- -->
   <div id="ge-ent-comparativo" class="panel">
-    <p class="tab-intro">Evolución mes a mes · septiembre es corte parcial · junio es la línea base, antes del agente</p>
+    <p class="tab-intro">Evolución mes a mes · *octubre es corte parcial · junio es la línea base, antes del agente</p>
 
     <section>
-      <div class="card table-wrap">
-        <table class="trend">
-          <thead><tr><th>Indicador</th><th>Junio</th><th>Julio</th><th>Agosto</th><th>Septiembre</th><th>Último mes</th></tr></thead>
-          <tbody>
-            <tr><td>Contactabilidad del agente</td><td class="na">—</td><td>99,3%</td><td>97,3%</td><td class="last">96,9%</td><td class="delta"><span class="chip bad">▼ −0,4 pp</span></td></tr>
-            <tr><td>Efectividad de la gestión</td><td class="na">—</td><td>93,9%</td><td>95,0%</td><td class="last">95,2%</td><td class="delta"><span class="chip good">▲ +0,2 pp</span></td></tr>
-            <tr><td>Entregas efectivas</td><td>93,2%</td><td>94,2%</td><td>93,9%</td><td class="last">94,4%</td><td class="delta"><span class="chip good">▲ +0,5 pp</span></td></tr>
-          </tbody>
-        </table>
+      <div class="cmp-grid">
+        <div class="card cmp">
+          <div class="cmp-head"><h3>Contactabilidad del agente</h3><div class="cmp-last"><b>96,6%</b><span class="chip bad">▼ −0,3 pp vs. sep.</span></div></div>
+          
+          <div class="cols" style="--n:4">
+            <div class="col"><span class="v">99,3%</span><div class="b" style="height:80.0%"></div><span class="m">Jul</span></div><div class="col"><span class="v">97,3%</span><div class="b" style="height:56.5%"></div><span class="m">Ago</span></div><div class="col"><span class="v">96,9%</span><div class="b" style="height:51.9%"></div><span class="m">Sep</span></div><div class="col last"><span class="v">96,6%</span><div class="b" style="height:48.2%"></div><span class="m">Oct*</span></div>
+          </div>
+          <div class="scale">Escala desde 93%</div>
+        </div>
+        <div class="card cmp">
+          <div class="cmp-head"><h3>Efectividad de la gestión</h3><div class="cmp-last"><b>97,3%</b><span class="chip good">▲ +2,4 pp vs. sep.</span></div></div>
+          
+          <div class="cols" style="--n:4">
+            <div class="col"><span class="v">93,9%</span><div class="b" style="height:45.7%"></div><span class="m">Jul</span></div><div class="col"><span class="v">95,0%</span><div class="b" style="height:56.6%"></div><span class="m">Ago</span></div><div class="col"><span class="v">94,9%</span><div class="b" style="height:55.4%"></div><span class="m">Sep</span></div><div class="col last"><span class="v">97,3%</span><div class="b" style="height:80.0%"></div><span class="m">Oct*</span></div>
+          </div>
+          <div class="scale">Escala desde 90%</div>
+        </div>
+        <div class="card cmp">
+          <div class="cmp-head"><h3>Entregas efectivas</h3><div class="cmp-last"><b>95,1%</b><span class="chip good">▲ +1,0 pp vs. sep.</span></div></div>
+          
+          <div class="cols" style="--n:5">
+            <div class="col"><span class="v">93,2%</span><div class="b" style="height:45.6%"></div><span class="m">Jun</span></div><div class="col"><span class="v">94,2%</span><div class="b" style="height:63.4%"></div><span class="m">Jul</span></div><div class="col"><span class="v">93,9%</span><div class="b" style="height:58.1%"></div><span class="m">Ago</span></div><div class="col"><span class="v">94,1%</span><div class="b" style="height:62.4%"></div><span class="m">Sep</span></div><div class="col last"><span class="v">95,1%</span><div class="b" style="height:80.0%"></div><span class="m">Oct*</span></div>
+          </div>
+          <div class="scale">Escala desde 91%</div>
+        </div>
       </div>
     </section>
 
@@ -432,22 +542,23 @@
       <div class="fin-strip">
         <div class="fin-card"><div class="label">Julio</div><div class="value">$5,64M</div><div class="foot">Bruto $13,26M − agente $7,63M</div></div>
         <div class="fin-card"><div class="label">Agosto</div><div class="value">$5,61M</div><div class="foot">Bruto $8,73M − agente $3,13M</div></div>
-        <div class="fin-card"><div class="label">Septiembre (parcial)</div><div class="value">$9,88M</div><div class="foot">Bruto $13,00M − agente $3,13M</div></div>
-        <div class="fin-card"><div class="label">Total acumulado</div><div class="value pos">$21,12M</div><div class="foot">Julio + agosto + septiembre</div></div>
+        <div class="fin-card"><div class="label">Septiembre</div><div class="value">$7,42M</div><div class="foot">Bruto $10,54M − agente $3,13M</div></div>
+        <div class="fin-card"><div class="label">Octubre (parcial)</div><div class="value">$1,02M</div><div class="foot">Bruto $4,15M − agente $3,13M</div></div>
+        <div class="fin-card"><div class="label">Total acumulado</div><div class="value pos">$19,68M</div><div class="foot">Julio a octubre</div></div>
       </div>
     </section>
 
     <section>
       <div class="section-head"><h2>Puntos de atención</h2></div>
       <div class="attention">
-        <div class="att-item good"><div class="stripe"></div><p><b>La efectividad de la gestión mejora cada mes:</b> 93,9% → 95,0% → 95,2%.</p></div>
-        <div class="att-item amber"><div class="stripe"></div><p><b>Las entregas efectivas bajaron en agosto y se recuperan en septiembre (94,4%)</b> — siempre por encima de junio (93,2%).</p></div>
-        <div class="att-item good"><div class="stripe"></div><p><b>El programa acumula $21,12M de ahorro neto</b> en tres meses.</p></div>
+        <div class="att-item good"><div class="stripe"></div><p><b>Septiembre cierra con 94,1% de entregas efectivas</b> (+0,2 pp vs. agosto) y octubre arranca en 95,1% — siempre por encima de junio (93,2%).</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>La efectividad de la gestión se estabiliza alrededor de 95%</b> (95,0% en agosto → 94,9% en septiembre) tras el salto de julio.</p></div>
+        <div class="att-item good"><div class="stripe"></div><p><b>El programa acumula $19,68M de ahorro neto</b> de julio a octubre (octubre parcial).</p></div>
       </div>
     </section>
   </div>
 
-  <div class="tab-footer">Fuente: gestión bot + agente y entregas no efectivas del mes · Costo por entrega no efectiva: $90.000 · Línea base: junio · Corte 30/09/2026.</div>
+  <div class="tab-footer">Fuente: gestión bot + agente y entregas no efectivas del mes · Costo por entrega no efectiva: $90.000 · Línea base: junio · Octubre es corte parcial · Corte 07/10/2026.</div>
 
   </div><!-- /ge-entregas -->
 
@@ -458,6 +569,7 @@
     <button type="button" class="active" data-group="armado" data-target="ge-arm-julio">Julio</button>
     <button type="button" data-group="armado" data-target="ge-arm-agosto">Agosto</button>
     <button type="button" data-group="armado" data-target="ge-arm-septiembre">Septiembre</button>
+    <button type="button" data-group="armado" data-target="ge-arm-octubre">Octubre</button>
     <button type="button" data-group="armado" data-target="ge-arm-comparativo">Comparativo</button>
   </div>
 
@@ -605,33 +717,33 @@
 
   <!-- ---- Armado / Septiembre ---- -->
   <div id="ge-arm-septiembre" class="panel">
-    <p class="tab-intro">Septiembre 2026 · corte parcial 1 al 29 · 8.301 clientes</p>
+    <p class="tab-intro">Septiembre 2026 · mes completo · 8.713 clientes</p>
 
     <section>
       <div class="hero-grid">
         <div class="hero-card">
           <div class="label">Contactabilidad</div>
-          <div class="value">93,5%</div>
-          <span class="chip good">▲ +17,9 pp vs. agosto</span>
-          <div class="foot">7.761 de 8.301 · 540 sin contacto</div>
+          <div class="value">93,0%</div>
+          <span class="chip good">▲ +17,4 pp vs. agosto</span>
+          <div class="foot">8.102 de 8.713 · 611 sin contacto</div>
         </div>
         <div class="hero-card">
           <div class="label">Confirmación</div>
-          <div class="value">60,7%</div>
-          <span class="chip good">▲ +9,8 pp vs. agosto</span>
-          <div class="foot">5.040 de 8.301 clientes</div>
+          <div class="value">60,4%</div>
+          <span class="chip good">▲ +9,5 pp vs. agosto</span>
+          <div class="foot">5.260 de 8.713 clientes</div>
         </div>
         <div class="hero-card">
           <div class="label">Efectividad de la gestión</div>
-          <div class="value">63,9%</div>
-          <span class="chip good">▲ +1,0 pp vs. agosto</span>
-          <div class="foot">4.708 de 7.366 contactados</div>
+          <div class="value">63,3%</div>
+          <span class="chip good">▲ +0,4 pp vs. agosto</span>
+          <div class="foot">4.916 de 7.769 contactados</div>
         </div>
         <div class="hero-card">
           <div class="label">Armados efectivos*</div>
           <div class="value">74,1%</div>
           <span class="chip good">▲ +10,9 pp vs. agosto</span>
-          <div class="foot">10.704 de 14.447 servicios</div>
+          <div class="foot">10.752 de 14.501 servicios</div>
         </div>
       </div>
     </section>
@@ -640,18 +752,18 @@
       <div class="split">
         <div class="card">
           <h3>Principales causales — armados no efectivos*</h3>
-          <div class="sub">Top 5 de 3.743 casos (75,7%)</div>
-          <div class="bar-row"><span class="lbl">Cliente cancela</span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--s8);"></div></div><span class="num">1.095</span></div>
-          <div class="bar-row"><span class="lbl">Armó el producto</span><div class="bar-track"><div class="bar-fill" style="width:54.8%; background:var(--s8);"></div></div><span class="num">600</span></div>
-          <div class="bar-row"><span class="lbl">Novedad</span><div class="bar-track"><div class="bar-fill" style="width:47.1%; background:var(--s8);"></div></div><span class="num">516</span></div>
-          <div class="bar-row"><span class="lbl">Inmueble cerrado</span><div class="bar-track"><div class="bar-fill" style="width:30.8%; background:var(--s8);"></div></div><span class="num">337</span></div>
-          <div class="bar-row"><span class="lbl">Cancela visita</span><div class="bar-track"><div class="bar-fill" style="width:26.2%; background:var(--s8);"></div></div><span class="num">287</span></div>
+          <div class="sub">Top 5 de 3.749 casos (75,6%)</div>
+          <div class="bar-row"><span class="lbl">Cliente cancela</span><div class="bar-track"><div class="bar-fill" style="width:100.0%; background:var(--s8);"></div></div><span class="num">1.092</span></div>
+          <div class="bar-row"><span class="lbl">Armó el producto</span><div class="bar-track"><div class="bar-fill" style="width:55.1%; background:var(--s8);"></div></div><span class="num">602</span></div>
+          <div class="bar-row"><span class="lbl">Novedad</span><div class="bar-track"><div class="bar-fill" style="width:47.4%; background:var(--s8);"></div></div><span class="num">518</span></div>
+          <div class="bar-row"><span class="lbl">Inmueble cerrado</span><div class="bar-track"><div class="bar-fill" style="width:30.8%; background:var(--s8);"></div></div><span class="num">336</span></div>
+          <div class="bar-row"><span class="lbl">Cancela visita</span><div class="bar-track"><div class="bar-fill" style="width:26.3%; background:var(--s8);"></div></div><span class="num">287</span></div>
         </div>
         <div class="card">
           <h3>Resultado del armado*</h3>
-          <div class="sub">14.447 servicios del mes</div>
-          <div class="bar-row"><span class="lbl">Efectivo</span><div class="bar-track"><div class="bar-fill" style="width:74.1%; background:var(--good);"></div></div><span class="num">10.704</span></div>
-          <div class="bar-row"><span class="lbl">No efectivo</span><div class="bar-track"><div class="bar-fill" style="width:25.9%; background:var(--bad);"></div></div><span class="num">3.743</span></div>
+          <div class="sub">14.501 servicios del mes</div>
+          <div class="bar-row"><span class="lbl">Efectivo</span><div class="bar-track"><div class="bar-fill" style="width:74.1%; background:var(--good);"></div></div><span class="num">10.752</span></div>
+          <div class="bar-row"><span class="lbl">No efectivo</span><div class="bar-track"><div class="bar-fill" style="width:25.9%; background:var(--bad);"></div></div><span class="num">3.749</span></div>
         </div>
       </div>
     </section>
@@ -660,38 +772,133 @@
       <div class="section-head"><h2>Impacto económico</h2></div>
       <div class="fin-strip">
         <div class="fin-card"><div class="label">Esperado en el objetivo no efectivos — septiembre</div><div class="value">$101,91M</div><div class="foot">Escenario objetivo del business case (efectividad 70%)</div></div>
-        <div class="fin-card"><div class="label">Costo estimado de los no efectivos — septiembre*</div><div class="value">$78,81M</div><div class="foot"><b>Efectividad 74,1%</b> · 3.743 no efectivos</div></div>
+        <div class="fin-card"><div class="label">Costo estimado de los no efectivos — septiembre*</div><div class="value">$78,93M</div><div class="foot"><b>Efectividad 74,1%</b> · 3.749 no efectivos</div></div>
         <div class="fin-card"><div class="label">Impacto esperado — septiembre (business case)</div><div class="value">$15,70M</div><div class="foot">Bruto $18,83M − agente $3,13M</div></div>
-        <div class="fin-card"><div class="label">Ahorro estimado — septiembre</div><div class="value pos">$38,81M</div><div class="foot">Bruto $41,93M − agente $3,13M</div></div>
+        <div class="fin-card"><div class="label">Ahorro estimado — septiembre</div><div class="value pos">$38,68M</div><div class="foot">Bruto $41,81M − agente $3,13M</div></div>
       </div>
-      <p class="note">Corte parcial: las cifras pueden cambiar al cierre del mes.</p>
     </section>
 
     <section>
       <div class="section-head"><h2>Puntos de atención</h2></div>
       <div class="attention">
-        <div class="att-item good"><div class="stripe"></div><p><b>Los cuatro indicadores mejoran frente a agosto</b>, con el mayor salto en contactabilidad (+17,9 pp).</p></div>
-        <div class="att-item good"><div class="stripe"></div><p><b>El ahorro estimado ($38,81M) supera lo esperado</b> en el business case ($15,70M).</p></div>
-        <div class="att-item amber"><div class="stripe"></div><p><b>"Cliente cancela" sigue liderando</b> los no efectivos (29,3%).</p></div>
+        <div class="att-item good"><div class="stripe"></div><p><b>Los cuatro indicadores cierran por encima de agosto</b>, con el mayor salto en contactabilidad (+17,4 pp).</p></div>
+        <div class="att-item good"><div class="stripe"></div><p><b>El ahorro estimado ($38,68M) supera lo esperado</b> en el business case ($15,70M).</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>"Cliente cancela" sigue liderando</b> los no efectivos (29,1%).</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Armado / Octubre ---- -->
+  <div id="ge-arm-octubre" class="panel">
+    <p class="tab-intro">Octubre 2026 · corte parcial 1 al 6 · 1.955 clientes</p>
+
+    <section>
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="label">Contactabilidad</div>
+          <div class="value">79,6%</div>
+          <span class="chip bad">▼ −13,4 pp vs. septiembre</span>
+          <div class="foot">1.556 de 1.955 · 399 sin contacto</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Confirmación</div>
+          <div class="value">53,3%</div>
+          <span class="chip bad">▼ −7,1 pp vs. septiembre</span>
+          <div class="foot">1.042 de 1.955 clientes</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Efectividad de la gestión</div>
+          <div class="value">68,1%</div>
+          <span class="chip good">▲ +4,8 pp vs. septiembre</span>
+          <div class="foot">962 de 1.413 contactados</div>
+        </div>
+        <div class="hero-card">
+          <div class="label">Armados efectivos*</div>
+          <div class="value">72,0%</div>
+          <span class="chip bad">▼ −2,1 pp vs. septiembre</span>
+          <div class="foot">2.465 de 3.422 servicios</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div class="card">
+          <h3>Principales causales — armados no efectivos*</h3>
+          <div class="sub">Top 5 de 957 casos (76,2%)</div>
+          <div class="bar-row"><span class="lbl">Cliente cancela</span><div class="bar-track"><div class="bar-fill" style="width:100.0%; background:var(--s8);"></div></div><span class="num">290</span></div>
+          <div class="bar-row"><span class="lbl">Armó el producto</span><div class="bar-track"><div class="bar-fill" style="width:63.1%; background:var(--s8);"></div></div><span class="num">183</span></div>
+          <div class="bar-row"><span class="lbl">Novedad</span><div class="bar-track"><div class="bar-fill" style="width:33.1%; background:var(--s8);"></div></div><span class="num">96</span></div>
+          <div class="bar-row"><span class="lbl">Inmueble cerrado</span><div class="bar-track"><div class="bar-fill" style="width:30.3%; background:var(--s8);"></div></div><span class="num">88</span></div>
+          <div class="bar-row"><span class="lbl">No quiso armado</span><div class="bar-track"><div class="bar-fill" style="width:24.8%; background:var(--s8);"></div></div><span class="num">72</span></div>
+        </div>
+        <div class="card">
+          <h3>Resultado del armado*</h3>
+          <div class="sub">3.422 servicios del 1 al 7</div>
+          <div class="bar-row"><span class="lbl">Efectivo</span><div class="bar-track"><div class="bar-fill" style="width:72.0%; background:var(--good);"></div></div><span class="num">2.465</span></div>
+          <div class="bar-row"><span class="lbl">No efectivo</span><div class="bar-track"><div class="bar-fill" style="width:28.0%; background:var(--bad);"></div></div><span class="num">957</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Impacto económico</h2></div>
+      <div class="fin-strip">
+        <div class="fin-card"><div class="label">Esperado en el objetivo no efectivos — octubre</div><div class="value">$79,99M</div><div class="foot">Escenario objetivo del business case (efectividad 75%) · mes completo</div></div>
+        <div class="fin-card"><div class="label">Costo estimado de los no efectivos — octubre*</div><div class="value">$20,15M</div><div class="foot"><b>Efectividad 72,0%</b> · 957 no efectivos · 1 al 7</div></div>
+        <div class="fin-card"><div class="label">Impacto esperado — octubre (business case)</div><div class="value">$30,61M</div><div class="foot">Bruto $33,73M − agente $3,13M</div></div>
+      </div>
+      <p class="note">Corte parcial (7 de 31 días): el ahorro estimado se calcula al cierre del mes.</p>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Puntos de atención</h2></div>
+      <div class="attention">
+        <div class="att-item bad"><div class="stripe"></div><p><b>La contactabilidad cae a 79,6%:</b> el agente recupera solo el 48,0% de los clientes que el bot no contactó (septiembre: 79,2%).</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>Los armados efectivos bajan a 72,0%</b> (−2,1 pp) en la primera semana del mes.</p></div>
+        <div class="att-item amber"><div class="stripe"></div><p><b>"Cliente cancela" sigue liderando</b> los no efectivos (30,3%).</p></div>
       </div>
     </section>
   </div>
 
   <!-- ---- Armado / Comparativo ---- -->
   <div id="ge-arm-comparativo" class="panel">
-    <p class="tab-intro">Evolución mes a mes · septiembre es corte parcial</p>
+    <p class="tab-intro">Evolución mes a mes · *octubre es corte parcial</p>
 
     <section>
-      <div class="card table-wrap">
-        <table class="trend">
-          <thead><tr><th>Indicador</th><th>Julio</th><th>Agosto</th><th>Septiembre</th><th>Último mes</th></tr></thead>
-          <tbody>
-            <tr><td>Contactabilidad</td><td>71,3%</td><td>75,6%</td><td class="last">93,5%</td><td class="delta"><span class="chip good">▲ +17,9 pp</span></td></tr>
-            <tr><td>Confirmación</td><td>48,3%</td><td>50,9%</td><td class="last">60,7%</td><td class="delta"><span class="chip good">▲ +9,8 pp</span></td></tr>
-            <tr><td>Efectividad de la gestión</td><td>64,8%</td><td>62,9%</td><td class="last">63,9%</td><td class="delta"><span class="chip good">▲ +1,0 pp</span></td></tr>
-            <tr><td>Armados efectivos*</td><td>65,0%</td><td>63,2%</td><td class="last">74,1%</td><td class="delta"><span class="chip good">▲ +10,9 pp</span></td></tr>
-          </tbody>
-        </table>
+      <div class="cmp-grid" style="--c:2">
+        <div class="card cmp">
+          <div class="cmp-head"><h3>Contactabilidad</h3><div class="cmp-last"><b>79,6%</b><span class="chip bad">▼ −13,4 pp vs. sep.</span></div></div>
+          
+          <div class="cols" style="--n:4">
+            <div class="col"><span class="v">71,3%</span><div class="b" style="height:62.7%"></div><span class="m">Jul</span></div><div class="col"><span class="v">75,6%</span><div class="b" style="height:66.2%"></div><span class="m">Ago</span></div><div class="col"><span class="v">93,0%</span><div class="b" style="height:80.0%"></div><span class="m">Sep</span></div><div class="col last"><span class="v">79,6%</span><div class="b" style="height:69.3%"></div><span class="m">Oct*</span></div>
+          </div>
+          
+        </div>
+        <div class="card cmp">
+          <div class="cmp-head"><h3>Confirmación</h3><div class="cmp-last"><b>53,3%</b><span class="chip bad">▼ −7,1 pp vs. sep.</span></div></div>
+          
+          <div class="cols" style="--n:4">
+            <div class="col"><span class="v">48,3%</span><div class="b" style="height:65.2%"></div><span class="m">Jul</span></div><div class="col"><span class="v">50,9%</span><div class="b" style="height:68.4%"></div><span class="m">Ago</span></div><div class="col"><span class="v">60,4%</span><div class="b" style="height:80.0%"></div><span class="m">Sep</span></div><div class="col last"><span class="v">53,3%</span><div class="b" style="height:71.3%"></div><span class="m">Oct*</span></div>
+          </div>
+          
+        </div>
+        <div class="card cmp">
+          <div class="cmp-head"><h3>Efectividad de la gestión</h3><div class="cmp-last"><b>68,1%</b><span class="chip good">▲ +4,8 pp vs. sep.</span></div></div>
+          
+          <div class="cols" style="--n:4">
+            <div class="col"><span class="v">64,8%</span><div class="b" style="height:55.9%"></div><span class="m">Jul</span></div><div class="col"><span class="v">62,9%</span><div class="b" style="height:42.0%"></div><span class="m">Ago</span></div><div class="col"><span class="v">63,3%</span><div class="b" style="height:44.7%"></div><span class="m">Sep</span></div><div class="col last"><span class="v">68,1%</span><div class="b" style="height:80.0%"></div><span class="m">Oct*</span></div>
+          </div>
+          <div class="scale">Escala desde 58%</div>
+        </div>
+        <div class="card cmp">
+          <div class="cmp-head"><h3>Armados efectivos*</h3><div class="cmp-last"><b>72,0%</b><span class="chip bad">▼ −2,1 pp vs. sep.</span></div></div>
+          <div class="sub">Septiembre y octubre con la definición ajustada</div>
+          <div class="cols" style="--n:4">
+            <div class="col"><span class="v">65,0%</span><div class="b" style="height:44.6%"></div><span class="m">Jul</span></div><div class="col"><span class="v">63,2%</span><div class="b" style="height:37.7%"></div><span class="m">Ago</span></div><div class="col"><span class="v">74,1%</span><div class="b" style="height:80.0%"></div><span class="m">Sep</span></div><div class="col last"><span class="v">72,0%</span><div class="b" style="height:71.8%"></div><span class="m">Oct*</span></div>
+          </div>
+          <div class="scale">Escala desde 55%</div>
+        </div>
       </div>
     </section>
 
@@ -700,21 +907,22 @@
       <div class="fin-strip">
         <div class="fin-card"><div class="label">Costo estimado — julio</div><div class="value">$122,39M</div><div class="foot">5.813 no efectivos</div></div>
         <div class="fin-card"><div class="label">Costo estimado — agosto</div><div class="value">$135,76M</div><div class="foot">6.448 no efectivos · +$13,37M vs. julio</div></div>
-        <div class="fin-card"><div class="label">Costo estimado — septiembre*</div><div class="value">$78,81M</div><div class="foot">3.743 no efectivos · parcial</div></div>
+        <div class="fin-card"><div class="label">Costo estimado — septiembre*</div><div class="value">$78,93M</div><div class="foot">3.749 no efectivos · ahorro estimado $38,68M</div></div>
+        <div class="fin-card"><div class="label">Costo estimado — octubre*</div><div class="value">$20,15M</div><div class="foot">957 no efectivos · parcial 1 al 7</div></div>
       </div>
     </section>
 
     <section>
       <div class="section-head"><h2>Puntos de atención</h2></div>
       <div class="attention">
-        <div class="att-item good"><div class="stripe"></div><p><b>Septiembre mejora los cuatro indicadores</b> y deja atrás el punto bajo de agosto.</p></div>
-        <div class="att-item good"><div class="stripe"></div><p><b>La recuperación del agente crece cada mes:</b> 18,5% → 32,6% → 80,7% de los clientes que el bot no contactó.</p></div>
-        <div class="att-item amber"><div class="stripe"></div><p><b>La efectividad de la gestión casi no se mueve</b> (64,8% → 62,9% → 63,9%): más contacto aún no se traduce en más armados efectivos.</p></div>
+        <div class="att-item good"><div class="stripe"></div><p><b>Septiembre cierra como el mejor mes</b> en contactabilidad, confirmación y armados efectivos.</p></div>
+        <div class="att-item good"><div class="stripe"></div><p><b>La recuperación del agente creció hasta septiembre:</b> 18,5% → 32,6% → 79,2% de los clientes que el bot no contactó.</p></div>
+        <div class="att-item bad"><div class="stripe"></div><p><b>Octubre arranca con la recuperación del agente en 48,0%</b> — a vigilar en los próximos cortes.</p></div>
       </div>
     </section>
   </div>
 
-  <div class="tab-footer">Fuente: gestión bot + agente y servicios de armado del mes · *Septiembre con definición ajustada: no cuenta las cancelaciones en preventiva, "cliente arma - llamada" ni el incumplimiento del proveedor · Corte 30/09/2026.</div>
+  <div class="tab-footer">Fuente: gestión bot + agente y servicios de armado del mes · *Septiembre y octubre con definición ajustada: no cuentan las cancelaciones en preventiva, "cliente arma - llamada" ni el incumplimiento del proveedor · Octubre es corte parcial · Corte 07/10/2026.</div>
 
   </div><!-- /ge-armado -->
 
